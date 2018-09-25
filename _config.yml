@@ -14,3 +14,7 @@ github_username: juanek
 permalink: :title/
 sass:
   sass_dir: css
+
+# plugins
+plugins: [jekyll-paginate]
+paginate: 3
