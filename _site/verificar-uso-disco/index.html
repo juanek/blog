@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Juan E. Kipes Blog</title>
+
+  <link rel="stylesheet" href="/css/main.css">
+</head>
+
+  <body>
+    <!-- NAV -->
+<nav class="navbar navbar-expand-md navbar-light py-4">
+  <div class="container">
+    <a href="/" class="navbar-brand">
+      <h1 class="d-inline align-middle pl-3 text-primary">Juan E. Kipes</h1>
+    </a>
+    <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a href="/archivos/" class="nav-link">Archivos</a>
+        </li>
+        <li class="nav-item">
+          <a href="/acerca/" class="nav-link">Sobre Mí</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <section id="banner" class="py-5 d-none d-sm-block">
+  <div class="primary-overlay text-white">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12 text-center">
+          <h1 class="display-4 pt-1">
+	      Blog de desarrollo de software
+          </h1>
+      </div>
+<!--      <div class="col-md-2"></div>-->
+    </div>
+  </div>
+</section>
+
+    <div id="post" class="container pt-3">
+  <div class="row">
+    <div class="col">
+      <p class="lead text-info">
+        Sep 15, 2018
+      </p>
+      <h1>Como verificar el uso del disco en linux</h1>
+      <article>
+        <p>Para ontener información del uso del disco de archivos y directorios de sistemas UNIX/LINUX podemos usar el comando <strong>du (Disk Usage)</strong> .</p>
+
+<p>Algunos de los comandos <strong>du</strong> con combinación de opciones que nos ayudarán a encontrar esta información.</p>
+
+<p>Obtener el tamaño de todos los archivos y sub directorios recursivamente, en formato legible del directorio <strong>/home/juan/Documentos/cursoPython/</strong> con un indicador del tamaño de total de uso al final.</p>
+
+<h5 id="terminal">Terminal</h5>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">juan@juan:~<span class="nv">$ </span><span class="nb">du</span> <span class="nt">-ahc</span>  /home/juan/Documentos/cursoPython/
+0	/home/juan/Documentos/cursoPython/tutorial/ejercicio2.py
+4,0K	/home/juan/Documentos/cursoPython/tutorial/ejemploExisteDirectorio.py
+52K	/home/juan/Documentos/cursoPython/tutorial/dependencias.txt
+60K	/home/juan/Documentos/cursoPython/tutorial
+932K	/home/juan/Documentos/cursoPython/apuntes/curso-python.pdf
+936K	/home/juan/Documentos/cursoPython/apuntes
+4,0K	/home/juan/Documentos/cursoPython/indice.txt
+4,0K	/home/juan/Documentos/cursoPython/libros
+1008K	/home/juan/Documentos/cursoPython/
+1008K	total</code></pre></figure>
+
+<p>Cuando el árbol de directorios sobre el que necesitamos obtener irnformación es grande, podemos limitar su profundidad  con la opción <strong>–max-depth=</strong></p>
+
+<h5 id="terminal-1">Terminal</h5>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">juan@juan:~<span class="nv">$ </span><span class="nb">du</span> <span class="nt">-ahc</span> <span class="nt">--max-depth</span><span class="o">=</span>1 /home/juan/bitbucket/java/
+448K	/home/juan/bitbucket/java/CalculatorWS_Client_Application.
+152K	/home/juan/bitbucket/java/java-gson
+200K	/home/juan/bitbucket/java/.git
+4,0K	/home/juan/bitbucket/java/.gitignore
+184K	/home/juan/bitbucket/java/CalculatorWSApplication
+760K	/home/juan/bitbucket/java/java-test
+232K	/home/juan/bitbucket/java/CalculatorWSClient
+0	/home/juan/bitbucket/java/mitexto.txt
+2,0M	/home/juan/bitbucket/java/
+2,0M	total</code></pre></figure>
+
+<p>Si sólo queremos obtener información de los directorios podemos usar.</p>
+
+<h5 id="terminal-2">Terminal</h5>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">juan@juan:~<span class="nv">$ </span><span class="nb">du</span> <span class="nt">-hc</span> <span class="nt">--max-depth</span><span class="o">=</span>1 /home/juan/bitbucket/java/
+448K	/home/juan/bitbucket/java/CalculatorWS_Client_Application.
+152K	/home/juan/bitbucket/java/java-gson
+200K	/home/juan/bitbucket/java/.git
+184K	/home/juan/bitbucket/java/CalculatorWSApplication
+760K	/home/juan/bitbucket/java/java-test
+232K	/home/juan/bitbucket/java/CalculatorWSClient
+2,0M	/home/juan/bitbucket/java/
+2,0M	total</code></pre></figure>
+
+<p>Podemos ver más opciones de este comando con <strong>du –help</strong></p>
+<h5 id="terminal-3">Terminal</h5>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">juan@juan:~<span class="nv">$ </span><span class="nb">du</span> <span class="nt">--help</span>
+Modo de empleo: <span class="nb">du</span> <span class="o">[</span>OPCIÓN]... <span class="o">[</span>FICHERO]...
+       o bien:  <span class="nb">du</span> <span class="o">[</span>OPCIÓN]... <span class="nt">--files0-from</span><span class="o">=</span>F
+Summarize disk usage of the <span class="nb">set </span>of FILEs, recursively <span class="k">for </span>directories.
+
+Los argumentos obligatorios para las opciones largas son también obligatorios
+para las opciones cortas.
+  <span class="nt">-0</span>, <span class="nt">--null</span>            termina cada línea con NUL, no con nueva línea
+  <span class="nt">-a</span>, <span class="nt">--all</span>             muestra resultados para todos los ficheros, no sólo
+                        para los directorios
+      <span class="nt">--apparent-size</span>   muestra los tamaños aparentes, en lugar del uso de
+                          disco<span class="p">;</span> el tamaño aparente es normalmente más pequeño,
+                          puede ser más grande debido a agujeros en ficheros
+                          dispersos, fragmentación interna, bloques indirectos,
+                          etc.
+  <span class="nt">-B</span>, <span class="nt">--block-size</span><span class="o">=</span>TAM  escala los tamaños por TAM antes de mostrarlos<span class="p">;</span>
+                          p. ej., <span class="s1">'-BM'</span> muestra los tamaños en unidades de
+                          1.048.576 bytes<span class="p">;</span> vea el formato de TAMAÑO más abajo
+  <span class="nt">-b</span>, <span class="nt">--bytes</span>           equivalente a <span class="s1">'--apparent-size --block-size=1'</span>
+  <span class="nt">-c</span>, <span class="nt">--total</span>           produce un <span class="s2">"total"</span>
+  <span class="nt">-D</span>, <span class="nt">--dereference-args</span>  sigue solamente los enlaces listados en la línea de
+                          órdenes
+  <span class="nt">-d</span>, <span class="nt">--max-depth</span><span class="o">=</span>N     muestra el total para un directorio <span class="o">(</span>o para un fichero,
+                          con <span class="nt">--all</span><span class="o">)</span> solamente si está N o menos niveles por
+                          debajo del argumento de la línea de órdenes<span class="p">;</span>
+                          <span class="nt">--max-depth</span><span class="o">=</span>0 es lo mismo que <span class="nt">--summarize</span>
+      <span class="nt">--files0-from</span><span class="o">=</span>F   resume el uso de disco de los nombres de ficheros
+                          terminados en NUL especificados en el fichero F<span class="p">;</span>
+                          si F es - entonces lee los nombres de la entrada
+                          estándar
+  <span class="nt">-H</span>                    equivalente a <span class="nt">--dereference-args</span> <span class="o">(</span><span class="nt">-D</span><span class="o">)</span>
+  <span class="nt">-h</span>, <span class="nt">--human-readable</span>  muestra los tamaños de forma legible
+                        <span class="o">(</span>p. ej., 1K 234M 2G<span class="o">)</span>
+      <span class="nt">--inodes</span>          muestra el uso de nodos-i en lugar del uso de bloques
+  <span class="nt">-k</span>                    como <span class="nt">--block-size</span><span class="o">=</span>1K
+  <span class="nt">-L</span>, <span class="nt">--dereference</span>     sigue todos los enlaces simbólicos
+  <span class="nt">-l</span>, <span class="nt">--count-links</span>     cuenta los tamaños varias veces si hay enlaces fuertes
+  <span class="nt">-m</span>                    como <span class="nt">--block-size</span><span class="o">=</span>1M
+  <span class="nt">-P</span>, <span class="nt">--no-dereference</span>  no sigue ningún enlace simbólico <span class="o">(</span>predeterminado<span class="o">)</span>
+  <span class="nt">-S</span>, <span class="nt">--separate-dirs</span>   para directorios no incluye el tamaño de los subdirectorios
+      <span class="nt">--si</span>              como <span class="nt">-h</span>, pero utiliza potencias de 1000, no de 1024
+  <span class="nt">-s</span>, <span class="nt">--summarize</span>       muestra solamente un total para cada argumento
+  <span class="nt">-t</span>, <span class="nt">--threshold</span><span class="o">=</span>TAM    excluye entradas menores que TAM si es positivo,
+                           o entradas mayores que TAM si es negativo
+      <span class="nt">--time</span>             muestra la fecha/hora de la última modificación de
+                           cualquier fichero dentro del directorio, o de
+                           cualquiera de sus subdirectorios
+      <span class="nt">--time</span><span class="o">=</span>PALABRA     muestra la fecha/hora como PALABRA en lugar de la
+                           fecha de modificación:
+                           atime, access, use, ctime o status
+      <span class="nt">--time-style</span><span class="o">=</span>ESTILO muestra las fechas/horas usando el estilo ESTILO,
+                          que puede ser: full-iso, long-iso, iso, o +FORMATO
+                          FORMATO se interpreta como en <span class="s1">'date'</span>
+  <span class="nt">-X</span>, <span class="nt">--exclude-from</span><span class="o">=</span>FICH  excluye los ficheros que coinciden con
+                             cualquier patrón en FICH.
+      <span class="nt">--exclude</span><span class="o">=</span>PATRÓN     excluye los ficheros que coinciden con PATRÓN.
+  <span class="nt">-x</span>, <span class="nt">--one-file-system</span>    se salta los directorios de otros sistemas de
+                             ficheros
+      <span class="nt">--help</span>     muestra esta ayuda y finaliza
+      <span class="nt">--version</span>  informa de la versión y finaliza
+
+Los valores se muestran en unidades del primer TAMAÑO disponible de
+<span class="nt">--block-size</span>, y las variables de entorno DU_BLOCK_SIZE, BLOCK_SIZE y BLOCKSIZE.
+En caso contrario, las unidades son 1024 bytes <span class="o">(</span>o 512 si se ha
+establecido POSIXLY_CORRECT<span class="o">)</span><span class="nb">.</span>
+
+El argumento TAM es un entero y una unidad opcional <span class="o">(</span>ejemplo: 10M es 10<span class="k">*</span>1024<span class="k">*</span>1024<span class="o">)</span><span class="nb">.</span>
+Las unidades son K,M,G,T,P,E,Z,Y <span class="o">(</span>potencias de 1024<span class="o">)</span> o KB,MB, ... <span class="o">(</span>potencias de 1000<span class="o">)</span>.</code></pre></figure>
+
+
+      </article>
+    </div>
+  </div>
+</div>
+
+    <footer class="py-5">
+  <hr>
+  <div class="container text-center text-info">
+    <div class="row">
+      <div class="col">
+        
+          <div class="social-links">
+  <a target="_blank" href="https://github.com/juanek">
+    <i class="fab fa-github fa-2x"></i>
+  </a>
+  <a href="mailto:">
+    <i class="fa fa-envelope fa-2x" ></i>
+  </a>
+  <!--<a target="_blank" href="https://twitter.com/">
+    <i class="fab fa-twitter fa-2x"></i>
+  </a>-->
+</div>
+
+        
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        Todo el contenido es copyright Juan E. Kipes &copy; 2018.
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        All rights reserved.
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- JS -->
+<script defer src="https://use.fontawesome.com/releases/v5.0.8/js/all.js" integrity="sha384-SlE991lGASHoBfWbelyBPLsUlwY1GwNDJo3jSJO04KZ33K2bwfV9YBauFfnzvynJ" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script src="/js/clipboard.min.js"></script>
+<script src="/js/codeselect.js"></script>
+
+  </body>
+</html>

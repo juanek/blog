@@ -5,12 +5,16 @@
   tags: linux
   description: "El comando du muestra información sobre el uso del disco de archivos y directorios en Linux."
 ---
+
+
 Para ontener información del uso del disco de archivos y directorios de sistemas UNIX/LINUX podemos usar el comando **du (Disk Usage)** .
 
 Algunos de los comandos **du** con combinación de opciones que nos ayudarán a encontrar esta información.
 
-- Obtener el tamaño de todos los archivos y sub directorios recursivamente, en formato legible del directorio __/home/juan/Documentos/cursoPython/__ con un indicador del tamaño de total de uso al final.
-```console
+Obtener el tamaño de todos los archivos y sub directorios recursivamente, en formato legible del directorio __/home/juan/Documentos/cursoPython/__ con un indicador del tamaño de total de uso al final.
+
+##### Terminal
+{% highlight Bash %}
 juan@juan:~$ du -ahc  /home/juan/Documentos/cursoPython/
 0	/home/juan/Documentos/cursoPython/tutorial/ejercicio2.py
 4,0K	/home/juan/Documentos/cursoPython/tutorial/ejemploExisteDirectorio.py
@@ -22,10 +26,12 @@ juan@juan:~$ du -ahc  /home/juan/Documentos/cursoPython/
 4,0K	/home/juan/Documentos/cursoPython/libros
 1008K	/home/juan/Documentos/cursoPython/
 1008K	total
-```
+{% endhighlight %}
 
-- Cuando el árbol de directorios sobre el que necesitamos obtener irnformación es grande, podemos limitar su profundidad  con la opción __--max-depth=__
-```console
+Cuando el árbol de directorios sobre el que necesitamos obtener irnformación es grande, podemos limitar su profundidad  con la opción __--max-depth=__
+
+##### Terminal
+{% highlight Bash %}
 juan@juan:~$ du -ahc --max-depth=1 /home/juan/bitbucket/java/
 448K	/home/juan/bitbucket/java/CalculatorWS_Client_Application.
 152K	/home/juan/bitbucket/java/java-gson
@@ -37,10 +43,12 @@ juan@juan:~$ du -ahc --max-depth=1 /home/juan/bitbucket/java/
 0	/home/juan/bitbucket/java/mitexto.txt
 2,0M	/home/juan/bitbucket/java/
 2,0M	total
-```
+{% endhighlight %}
 
-- Si sólo queremos obtener información de los directorios podemos usar.
-```console
+Si sólo queremos obtener información de los directorios podemos usar.
+
+##### Terminal
+{% highlight Bash %}
 juan@juan:~$ du -hc --max-depth=1 /home/juan/bitbucket/java/
 448K	/home/juan/bitbucket/java/CalculatorWS_Client_Application.
 152K	/home/juan/bitbucket/java/java-gson
@@ -50,10 +58,11 @@ juan@juan:~$ du -hc --max-depth=1 /home/juan/bitbucket/java/
 232K	/home/juan/bitbucket/java/CalculatorWSClient
 2,0M	/home/juan/bitbucket/java/
 2,0M	total
-```
+{% endhighlight %}
 
 Podemos ver más opciones de este comando con **du --help**
-```console
+##### Terminal
+{% highlight Bash %}
 juan@juan:~$ du --help
 Modo de empleo: du [OPCIÓN]... [FICHERO]...
        o bien:  du [OPCIÓN]... --files0-from=F
@@ -122,5 +131,5 @@ establecido POSIXLY_CORRECT).
 
 El argumento TAM es un entero y una unidad opcional (ejemplo: 10M es 10*1024*1024).
 Las unidades son K,M,G,T,P,E,Z,Y (potencias de 1024) o KB,MB, ... (potencias de 1000).
+{% endhighlight %}
 
-```
