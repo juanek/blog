@@ -5,6 +5,11 @@ author:
 description:
 url:
 
+# Social icons
+show_social_icons: true
+github_username: juanek
+#twitter_username: juanek
+
 # Build settings
 permalink: :title/
 sass:
