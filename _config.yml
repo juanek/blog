@@ -1,1 +1,11 @@
-theme: jekyll-theme-cayman
+# Site settings
+title:
+email:
+author:
+description:
+url:
+
+# Build settings
+permalink: :title/
+sass:
+  sass_dir: css
