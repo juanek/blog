@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Juan E. Kipes Blog</title>
+
+  <link rel="stylesheet" href="/css/main.css">
+</head>
+
+  <body>
+    <!-- NAV -->
+<nav class="navbar navbar-expand-md navbar-light py-4">
+  <div class="container">
+    <a href="/" class="navbar-brand">
+      <h2 class="d-inline align-middle pl-3 text-primary">Juan E. Kipes</h2>
+    </a>
+    <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a href="/archivos/" class="nav-link">Archivos</a>
+        </li>
+        <li class="nav-item">
+          <a href="/acerca/" class="nav-link">Sobre Mí</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <section id="banner" class="py-5 d-none d-sm-block">
+  <div class="primary-overlay text-white">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12 text-center">
+          <h1 class="display-5 pt-1">
+	      ...un blog para compartir código...
+          </h1>
+      </div>
+<!--      <div class="col-md-2"></div>-->
+    </div>
+  </div>
+</section>
+
+    <div id="post" class="container pt-3">
+  <div class="row">
+    <div class="col">
+      <p class="lead text-info">
+        Sep 24, 2018
+      </p>
+      <h1>Usar systemctl para administrar servicios en Linux</h1>
+      <article>
+        <p>Los servicios son programas que corren continuamente en el sistema, esperando por eventos externos para procesar alguna cosa y que hagan a esto todo el tiempo. Hay muchos servicios ejecutándose todo el tiempo en un servidor Linux. Como servidor web, base de datos, FTP,SSH, impresión,DHCP, servidor LDAP.</p>
+
+<p>Systemctl es un programa que se usa para administrar las tareas de los servicios. Con el comando systemctl podemos iniciar y parar un servicio, habilitarlo como demonio, controlar el estado actual del mismo. Además podemos configurar algunas opciones de arranque y permisos de ejecución.</p>
+
+<p>Vamos a mostrar como administrar y trabajar con servicios, instalando un servidor de aplicaciones Resin y hacer las configuraciones necesarias para administrarlo con systemctl.</p>
+
+<h1 id="instalar-el-servidor-resin">Instalar el servidor Resin.</h1>
+
+<p>Descargamos la última versión estable de <a href="http://caucho.com/products/resin/download">Resin</a>.</p>
+
+<figure class="highlight"><pre><code class="language-console" data-lang="console"><span class="go">wget http://caucho.com/download/resin-4.0.58.tar.gz</span></code></pre></figure>
+
+<p>Descomprimimos <strong>resin-4.0.58.tar.gz</strong> en un directorio <strong>resin-test</strong>.</p>
+
+<figure class="highlight"><pre><code class="language-console" data-lang="console"><span class="go">tar xzfv resin-4.0.58.tar.gz -C resin-test --strip-components=1</span></code></pre></figure>
+
+<p>Lo movemos a <strong>/opt/resin-test</strong> y ubicados en <strong>/opt/resin-test</strong> verificamos que funciona correctamente.
+Iniciar el servidor Resin.</p>
+
+<figure class="highlight"><pre><code class="language-console" data-lang="console"><span class="go">sh bin/resin.sh start</span></code></pre></figure>
+
+<p>Verificar que esta corriendo el port 8080 con el comando <strong>curl</strong></p>
+
+<figure class="highlight"><pre><code class="language-console" data-lang="console"><span class="go">curl http://localhost:8080</span></code></pre></figure>
+
+<p>Deberíamos ver la Home Page de Resin.</p>
+
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;html&gt;</span>
+  <span class="nt">&lt;head&gt;</span>
+    <span class="nt">&lt;title&gt;</span>Resin<span class="ni">&amp;#174;</span> Default Home Page<span class="nt">&lt;/title&gt;&lt;/head&gt;</span>
+    <span class="nt">&lt;body&gt;</span>
+          <span class="nt">&lt;h1</span> <span class="na">style=</span><span class="s">"background: #ccddff"</span><span class="nt">&gt;</span>Resin<span class="ni">&amp;#174;</span> Default Home Page<span class="nt">&lt;/h1&gt;</span>
+            This is the default page for the Resin web server.
+            <span class="nt">&lt;p&gt;</span>Documentation is available at <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"/resin-doc"</span><span class="nt">&gt;</span>/resin-doc<span class="nt">&lt;/a&gt;</span>.
+            <span class="nt">&lt;p&gt;</span>Administration is available at <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"/resin-admin"</span><span class="nt">&gt;</span>/resin-admin<span class="nt">&lt;/a&gt;</span>.
+    <span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span></code></pre></figure>
+
+<p>Parar el servidor Resin.</p>
+
+<figure class="highlight"><pre><code class="language-console" data-lang="console"><span class="go">sh bin/resin.sh stop</span></code></pre></figure>
+
+<p>Tenemos instalado un servidor de aplicaciones web Resin, sabemos como iniciar y parar el servicio web. Vamos a crear un archivo <strong>.service</strong> para poder administar este servicio con el comando <strong>systenctl</strong>.</p>
+
+<p>Para una instalación y configuración mas avanzada del servidor, ver <a href="http://caucho.com/resin-4.0/">Resin</a></p>
+
+<h1 id="crear-nuestro-archivo-service">Crear nuestro archivo .service.</h1>
+<p>Vamos a crear un unproceso que se encargue de iniciar y vigilar nuestro servidor web Resin (volver a iniciarlo si se para, reiniciarlo cuando el sistema se reinicie, poder controlar su estado…). En systemd estos procesos se definen y configuran en los archivos denominados de unidad, con extensión <strong>.service</strong></p>
+
+<p>Creamos un archivo <strong>resin-test.service</strong> en el directorio <strong>/etc/systemd/system</strong>.</p>
+
+<figure class="highlight"><pre><code class="language-console" data-lang="console"><span class="go">touch resin-test.service</span></code></pre></figure>
+
+<p>El contenido de nuestro archivo <strong>.service</strong> es</p>
+
+<figure class="highlight"><pre><code class="language-console" data-lang="console"><span class="go">[Unit]
+Description=Resin Test service
+
+[Service]
+Type=forking
+Environment=JAVA_HOME=/usr/lib/jvm/java-8-oracle
+Environment=RESIN_HOME=/opt/resin-test
+WorkingDirectory=/opt/resin-test
+SyslogIdentifier=Resin Test
+ExecStart=/bin/sh /opt/resin-test/bin/resin.sh start
+ExecStop=/bin/sh /opt/resin-test/bin/resin.sh stop
+User=juan
+
+[Install]
+WantedBy=multi-user.target</span></code></pre></figure>
+
+<p>explicar que hace este archivo</p>
+
+<p>Unit files typically consist of three sections:
+[Unit] — contains generic options that are not dependent on the type of the unit. These options provide unit description, specify the unit’s behavior, and set dependencies to other units. For a list of most frequently used [Unit] options, see</p>
+
+<p>Description	A meaningful description of the unit. This text is displayed for example in the output of the systemctl status command.
+After[b]	Defines the order in which units are started. The unit starts only after the units specified in After are active. Unlike Requires, After does not explicitly activate the specified units. The Before option has the opposite functionality to After.</p>
+
+<p>Type	Configures the unit process startup type that affects the functionality of ExecStart and related options. One of:
+Forking – The process started with ExecStart spawns a child process that becomes the main process of the service. The parent process exits when the startup is complete.</p>
+
+<p>ExecStart	Specifies commands or scripts to be executed when the unit is started. ExecStartPre and ExecStartPost specify custom commands to be executed before and after ExecStart. Type=oneshot enables specifying multiple custom commands that are then executed sequentially.
+ExecStop	Specifies commands or scripts to be executed when the unit is stopped.</p>
+
+<p>Important [Install] Section Options
+WantedBy	A list of units that weakly depend on the unit. When this unit is enabled, the units listed in WantedBy gain a Want dependency on the unit.</p>
+
+<p>Para una descrición detallada del sistema de administración systemd, ver <a href="https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/html/system_administrators_guide/sect-managing_services_with_systemd-unit_files">CREATING AND MODIFYING SYSTEMD UNIT FILES</a></p>
+
+<h1 id="habilitar-y-administrar-nuestro-servicio">Habilitar y administrar nuestro servicio.</h1>
+
+<p>Notify systemd that a new name.service file exists by executing the following command as root:
+systemctl daemon-reload
+systemctl start name.service</p>
+
+<p>Always run the systemctl daemon-reload command after creating new unit files or modifying existing unit files</p>
+
+<p>The name.service unit can now be managed as any other system service with commands</p>
+
+<p>A code section without any header</p>
+
+<p>Service Management
+The fundamental purpose of an init system is to initialize the components that must be started after the Linux kernel is booted (traditionally known as “userland” components). The init system is also used to manage services and daemons for the server at any point while the system is running. With that in mind, we will start with some simple service management operations.</p>
+
+<p>In systemd, the target of most actions are “units”, which are resources that systemd knows how to manage. Units are categorized by the type of resource they represent and they are defined with files known as unit files. The type of each unit can be inferred from the suffix on the end of the file.</p>
+
+<p>For service management tasks, the target unit will be service units, which have unit files with a suffix of .service. However, for most service management commands, you can actually leave off the .service suffix, as systemd is smart enough to know that you probably want to operate on a service when using service management commands.</p>
+
+<p>Starting and Stopping Services</p>
+
+<p>To start a systemd service, executing instructions in the service’s unit file, use the start command. If you are running as a non-root user, you will have to use sudo since this will affect the state of the operating system:</p>
+
+<p>sudo systemctl start application.service
+As we mentioned above, systemd knows to look for *.service files for service management commands, so the command could just as easily be typed like this:</p>
+
+<p>sudo systemctl start application
+Although you may use the above format for general administration, for clarity, we will use the .service suffix for the remainder of the commands to be explicit about the target we are operating on.</p>
+
+<p>To stop a currently running service, you can use the stop command instead:</p>
+
+<p>sudo systemctl stop application.service
+Restarting and Reloading</p>
+
+<p>To restart a running service, you can use the restart command:</p>
+
+<p>sudo systemctl restart application.service
+If the application in question is able to reload its configuration files (without restarting), you can issue the reload command to initiate that process:</p>
+
+<p>sudo systemctl reload application.service
+If you are unsure whether the service has the functionality to reload its configuration, you can issue the reload-or-restart command. This will reload the configuration in-place if available. Otherwise, it will restart the service so the new configuration is picked up:</p>
+
+<p>sudo systemctl reload-or-restart application.service</p>
+
+<p>Enabling and Disabling Services</p>
+
+<p>The above commands are useful for starting or stopping commands during the current session. To tell systemd to start services automatically at boot, you must enable them.
+To start a service at boot, use the enable command:</p>
+
+<p>sudo systemctl enable application.service
+This will create a symbolic link from the system’s copy of the service file (usually in /lib/systemd/system or /etc/systemd/system) into the location on disk where systemd looks for autostart files (usually /etc/systemd/system/some_target.target.wants. We will go over what a target is later in this guide).</p>
+
+<p>To disable the service from starting automatically, you can type:</p>
+
+<p>sudo systemctl disable application.service
+This will remove the symbolic link that indicated that the service should be started automatically.</p>
+
+<p>Keep in mind that enabling a service does not start it in the current session. If you wish to start the service and enable it at boot, you will have to issue both the start and enable commands.</p>
+
+<p>Checking the Status of Services</p>
+
+<p>To check the status of a service on your system, you can use the status command:</p>
+
+<p>systemctl status application.service
+This will provide you with the service state, the cgroup hierarchy, and the first few log lines.</p>
+
+<p>recargar el si cambia el archivo .service</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">A small HTML snippet</code></pre></figure>
+
+
+      </article>
+    </div>
+  </div>
+</div>
+
+    <footer class="py-5">
+  <hr>
+  <div class="container text-center text-info">
+    <div class="row">
+      <div class="col">
+        
+          <div class="social-links">
+  <a target="_blank" href="https://github.com/juanek">
+    <i class="fab fa-github fa-2x"></i>
+  </a>
+  <a href="mailto:juanekipes@gmail.com">
+    <i class="fa fa-envelope fa-2x" ></i>
+  </a>
+  <!--<a target="_blank" href="https://twitter.com/">
+    <i class="fab fa-twitter fa-2x"></i>
+  </a>-->
+</div>
+
+        
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        Todo el contenido es copyright Juan E. Kipes &copy; 2018.
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- JS -->
+<script defer src="https://use.fontawesome.com/releases/v5.0.8/js/all.js" integrity="sha384-SlE991lGASHoBfWbelyBPLsUlwY1GwNDJo3jSJO04KZ33K2bwfV9YBauFfnzvynJ" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script type="text/javascript">
+    hljs.initHighlightingOnLoad();
+    function applyTiles() {
+      var posts = $('#post');
+      posts.imagesLoaded(function() {
+        $('#post').masonry({ itemSelector : '.post' });;
+      });
+    }
+    $(function() {
+      applyTiles();
+    });
+    $(window).resize(function() {
+      applyTiles();
+    });
+  </script>
+
+  </body>
+</html>
