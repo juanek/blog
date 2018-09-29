@@ -37,9 +37,9 @@
     <div class="container">
       <div class="row">
         <div class="col-md-12 text-center">
-          <h1 class="display-5 pt-1">
+          <!--<h1 class="display-5 pt-1">
 	      ...un blog para compartir código...
-          </h1>
+      </h1>-->
       </div>
 <!--      <div class="col-md-2"></div>-->
     </div>
@@ -54,11 +54,25 @@
       </p>
       <h1>Usar systemctl para administrar servicios en Linux</h1>
       <article>
-        <p>Los servicios son programas que corren continuamente en el sistema, esperando por eventos externos para procesar alguna cosa y que hagan a esto todo el tiempo. Hay muchos servicios ejecutándose todo el tiempo en un servidor Linux. Como servidor web, base de datos, FTP,SSH, impresión,DHCP, servidor LDAP.</p>
+        <h3 id="contenido">Contenido</h3>
+<ul>
+  <li><a href="#id-section1">Instalar el servidor Resin.</a></li>
+  <li><a href="#id-section2">Crear nuestro archivo .service.</a></li>
+  <li><a href="#id-section3">Administrar nuestro servicio</a></li>
+  <li><a href="#id-section4">Arrancar y parar servicios.</a></li>
+  <li><a href="#id-section5">Reiniciar servicios.</a></li>
+  <li><a href="#id-section6">Habilitar y deshabilitar servicios.</a></li>
+  <li><a href="#id-section7">Verificar el estado de un servicio.</a></li>
+  <li><a href="#id-section8">Ver los registros del sistema.</a></li>
+  <li><a href="#id-section9">Recursos útiles.</a></li>
+</ul>
+
+<p>Los servicios son programas que corren continuamente en el sistema, esperando por eventos externos para procesar alguna cosa y que hagan a esto todo el tiempo. Hay muchos servicios ejecutándose todo el tiempo en un servidor Linux. Como servidor web, base de datos, FTP,SSH, impresión,DHCP, servidor LDAP.</p>
 
 <p>Systemctl es un programa que se usa para administrar las tareas de los servicios. Con el comando systemctl podemos iniciar y parar un servicio, habilitarlo como demonio, controlar el estado actual del mismo. Además podemos configurar algunas opciones de arranque y permisos de ejecución.</p>
 
 <p>Vamos a mostrar como administrar y trabajar con servicios, instalando un servidor de aplicaciones Resin y hacer las configuraciones necesarias para administrarlo con systemctl.</p>
+<div id="id-section1" />
 
 <h1 id="instalar-el-servidor-resin">Instalar el servidor Resin.</h1>
 
@@ -100,6 +114,8 @@ Iniciar el servidor Resin.</p>
 
 <p>Para una instalación y configuración mas avanzada del servidor, ver <a href="http://caucho.com/resin-4.0/">Resin</a></p>
 
+<div id="id-section2" />
+
 <h1 id="crear-nuestro-archivo-service">Crear nuestro archivo .service.</h1>
 <p>Vamos a crear un unproceso que se encargue de iniciar y vigilar nuestro servidor web Resin (volver a iniciarlo si se para, reiniciarlo cuando el sistema se reinicie, poder controlar su estado…). En systemd estos procesos se definen y configuran en los archivos denominados de unidad, con extensión <strong>.service</strong></p>
 
@@ -111,12 +127,12 @@ Iniciar el servidor Resin.</p>
 
 <figure class="highlight"><pre><code class="language-console" data-lang="console"><span class="go">[Unit]
 Description=Resin Test service
+After=syslog.target
 
 [Service]
 Type=forking
 Environment=JAVA_HOME=/usr/lib/jvm/java-8-oracle
 Environment=RESIN_HOME=/opt/resin-test
-WorkingDirectory=/opt/resin-test
 SyslogIdentifier=Resin Test
 ExecStart=/bin/sh /opt/resin-test/bin/resin.sh start
 ExecStop=/bin/sh /opt/resin-test/bin/resin.sh stop
@@ -127,93 +143,161 @@ WantedBy=multi-user.target</span></code></pre></figure>
 
 <p>explicar que hace este archivo</p>
 
-<p>Unit files typically consist of three sections:
-[Unit] — contains generic options that are not dependent on the type of the unit. These options provide unit description, specify the unit’s behavior, and set dependencies to other units. For a list of most frequently used [Unit] options, see</p>
+<p>Los archivos <strong>unit</strong> consisten de tres secciones:</p>
 
-<p>Description	A meaningful description of the unit. This text is displayed for example in the output of the systemctl status command.
-After[b]	Defines the order in which units are started. The unit starts only after the units specified in After are active. Unlike Requires, After does not explicitly activate the specified units. The Before option has the opposite functionality to After.</p>
+<h4 id="unit">[Unit]</h4>
 
-<p>Type	Configures the unit process startup type that affects the functionality of ExecStart and related options. One of:
-Forking – The process started with ExecStart spawns a child process that becomes the main process of the service. The parent process exits when the startup is complete.</p>
+<p><strong>Description:</strong> una descripción significativa del archivo de unidad. Este texto se mostrará cuando se usa el comando <strong>systemctl status</strong>.</p>
 
-<p>ExecStart	Specifies commands or scripts to be executed when the unit is started. ExecStartPre and ExecStartPost specify custom commands to be executed before and after ExecStart. Type=oneshot enables specifying multiple custom commands that are then executed sequentially.
-ExecStop	Specifies commands or scripts to be executed when the unit is stopped.</p>
+<p><strong>After:</strong> define el orden que arrancará la unidad. La unidad arrancará después que la unidad especificada en <strong>After</strong> esté activa. La opción <strong>Before</strong> tiene la funcionalidad opuesta a <strong>After</strong>.</p>
 
-<p>Important [Install] Section Options
-WantedBy	A list of units that weakly depend on the unit. When this unit is enabled, the units listed in WantedBy gain a Want dependency on the unit.</p>
+<h4 id="service">[Service]</h4>
 
-<p>Para una descrición detallada del sistema de administración systemd, ver <a href="https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/html/system_administrators_guide/sect-managing_services_with_systemd-unit_files">CREATING AND MODIFYING SYSTEMD UNIT FILES</a></p>
+<p><strong>Type:</strong> especifica el tipo de arranque que afectará a la funcionalidad de <strong>ExecStart</strong> y sus opciones. Una de estas opciones puede ser <strong>Forking</strong>, en esta opción el proceso comienza con ExecStart y crea un proceso hio que se convierte en el proceso principal del servicio, el proceso padre espera hasta ser notificado que esta todo bien para dar por finalizado el proceso de inicio exitoso.</p>
 
-<h1 id="habilitar-y-administrar-nuestro-servicio">Habilitar y administrar nuestro servicio.</h1>
+<p><strong>Environment</strong> esta directiva nos permite configurar variables de entorno para ejecutar nustro proceso.</p>
 
-<p>Notify systemd that a new name.service file exists by executing the following command as root:
-systemctl daemon-reload
-systemctl start name.service</p>
+<p><strong>SyslogIdentifier</strong> este identificador será de utilidad para identificar nuestro servicio en los registros del sistema.</p>
 
-<p>Always run the systemctl daemon-reload command after creating new unit files or modifying existing unit files</p>
+<p><strong>ExecStart</strong> especifica comandos o script a ser ejecutados para arrancar la unidad. <strong>ExecStartPre</strong> y <strong>ExecStartPost</strong>
+especifican los comandos a ser ejecutados antes y despues de <strong>ExecStart</strong>.</p>
 
-<p>The name.service unit can now be managed as any other system service with commands</p>
+<p><strong>ExecStop</strong> especifica comandos o scripts a ser ejecutados para parar la unidad.</p>
 
-<p>A code section without any header</p>
+<h4 id="install">[Install]</h4>
+<p>Esta sección es opcional e indica que es lo que se debería ocurrir cuando la unidad se habilite.</p>
 
-<p>Service Management
-The fundamental purpose of an init system is to initialize the components that must be started after the Linux kernel is booted (traditionally known as “userland” components). The init system is also used to manage services and daemons for the server at any point while the system is running. With that in mind, we will start with some simple service management operations.</p>
+<p><strong>WantedBy</strong>
+WantedBy	cuando se habilite, esta nueva unidad pasará formar parte del grupo de unidades conocidas como <strong>multi-user.target</strong>, el servicio arrancará cuando el sistema alcance el nivel runLevel 2.</p>
 
-<p>In systemd, the target of most actions are “units”, which are resources that systemd knows how to manage. Units are categorized by the type of resource they represent and they are defined with files known as unit files. The type of each unit can be inferred from the suffix on the end of the file.</p>
+<p>La tabla de target y sus run levels:</p>
 
-<p>For service management tasks, the target unit will be service units, which have unit files with a suffix of .service. However, for most service management commands, you can actually leave off the .service suffix, as systemd is smart enough to know that you probably want to operate on a service when using service management commands.</p>
+<table class="mbtablestyle">
+  <thead>
+    <tr>
+      <th style="text-align: center">Run Lvl</th>
+      <th style="text-align: center">Target Units</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">0</td>
+      <td style="text-align: center">runlevel0.target, poweroff.target</td>
+      <td>Shut down and power off</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">1</td>
+      <td style="text-align: center">runlevel1.target, rescue.target</td>
+      <td>Set up a rescue shell</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">2,3,4</td>
+      <td style="text-align: center">runlevel[234].target,multi-user.target</td>
+      <td>Set up a non-gfx multi-user shell</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">5</td>
+      <td style="text-align: center">runlevel5.target, graphical.target</td>
+      <td>Set up a gfx multi-user shell</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">6</td>
+      <td style="text-align: center">runlevel6.target, reboot.target</td>
+      <td>Shut down and reboot the system</td>
+    </tr>
+  </tbody>
+</table>
+<p><br />
+Para una descrición detallada , ver <a href="https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/html/system_administrators_guide/sect-managing_services_with_systemd-unit_files">CREATING AND MODIFYING SYSTEMD UNIT FILES</a></p>
 
-<p>Starting and Stopping Services</p>
+<div id="id-section3" />
 
-<p>To start a systemd service, executing instructions in the service’s unit file, use the start command. If you are running as a non-root user, you will have to use sudo since this will affect the state of the operating system:</p>
+<h1 id="administrar-nuestro-servicio">Administrar nuestro servicio.</h1>
 
-<p>sudo systemctl start application.service
-As we mentioned above, systemd knows to look for *.service files for service management commands, so the command could just as easily be typed like this:</p>
+<p>Ahora notificamos a systemd que existe un nuevo <strong>.service</strong> ejecutando el comando</p>
 
-<p>sudo systemctl start application
-Although you may use the above format for general administration, for clarity, we will use the .service suffix for the remainder of the commands to be explicit about the target we are operating on.</p>
+<figure class="highlight"><pre><code class="language-console" data-lang="console"><span class="go">sudo systemctl daemon-reload</span></code></pre></figure>
 
-<p>To stop a currently running service, you can use the stop command instead:</p>
+<blockquote>
+  <p>Cada vez que creamos un nuevo <strong>.service</strong> o modificacmos uno existente debemos ejecutar el comando <strong>systemctl daemon-reload</strong></p>
+</blockquote>
 
-<p>sudo systemctl stop application.service
-Restarting and Reloading</p>
+<p>Ahora podemos administrar nuestro <strong>resin-test.service</strong> como cualquier otro servicio.</p>
+<div id="id-section4" />
+
+<h1 id="arrancar-y-parar-servicios">Arrancar y parar servicios.</h1>
+
+<p>Para iniciar un servicio, systemd ejecuta las instrucciones del archivo de unidad del servicio, usando el comando <strong>start</strong>. Si estas ejecutando comandos como usuario <strong>no root</strong>, debes usar <strong>sudo</strong> ya que esto afecta el estado del sistema operativo.</p>
+
+<figure class="highlight"><pre><code class="language-console" data-lang="console"><span class="go">sudo systemctl start resin-test.service</span></code></pre></figure>
+
+<p>Para parar un servicio que está ejecutándose puedes usar el comando <strong>stop</strong>.</p>
+<div id="id-section5" />
+
+<h1 id="reiniciar-servicios">Reiniciar servicios.</h1>
 
 <p>To restart a running service, you can use the restart command:</p>
 
-<p>sudo systemctl restart application.service
-If the application in question is able to reload its configuration files (without restarting), you can issue the reload command to initiate that process:</p>
+<figure class="highlight"><pre><code class="language-console" data-lang="console"><span class="go">sudo systemctl restart resin-test.service</span></code></pre></figure>
 
-<p>sudo systemctl reload application.service
-If you are unsure whether the service has the functionality to reload its configuration, you can issue the reload-or-restart command. This will reload the configuration in-place if available. Otherwise, it will restart the service so the new configuration is picked up:</p>
+<div id="id-section6" />
 
-<p>sudo systemctl reload-or-restart application.service</p>
+<h1 id="habilitar-y-deshabilitar-servicios">Habilitar y deshabilitar servicios.</h1>
 
-<p>Enabling and Disabling Services</p>
+<p>Los comandos de arriba son útiles para iniciar o para el servicio dureante la sesión actual. Para notificar a <strong>systemd</strong> que inicie el servicio automáticamnete durante el boot, debes habilitarlo.
+Para habilitar el servicio se usa el comando <strong>enabled</strong>.</p>
 
-<p>The above commands are useful for starting or stopping commands during the current session. To tell systemd to start services automatically at boot, you must enable them.
-To start a service at boot, use the enable command:</p>
+<figure class="highlight"><pre><code class="language-console" data-lang="console"><span class="gp">juan@juan:~$</span><span class="nb">sudo </span>systemctl <span class="nb">enable </span>resin-test.service
+<span class="go">Created symlink from /etc/systemd/system/multi-user.target.wants/resin-test.service to /etc/systemd/system/resin-test.service.</span></code></pre></figure>
 
-<p>sudo systemctl enable application.service
-This will create a symbolic link from the system’s copy of the service file (usually in /lib/systemd/system or /etc/systemd/system) into the location on disk where systemd looks for autostart files (usually /etc/systemd/system/some_target.target.wants. We will go over what a target is later in this guide).</p>
+<p>Esto creará un enlace simbólico a nuestro <strong>.service</strong> en la ubicación donde <strong>systemd</strong> busca los archivos de autoarranque.</p>
 
-<p>To disable the service from starting automatically, you can type:</p>
+<p>Para deshabilitar el autoarranque usa el comando <strong>disable</strong>.</p>
 
-<p>sudo systemctl disable application.service
-This will remove the symbolic link that indicated that the service should be started automatically.</p>
+<figure class="highlight"><pre><code class="language-console" data-lang="console"><span class="gp">juan@juan:~$</span><span class="nb">sudo </span>systemctl disable resin-test.service
+<span class="go">Removed symlink /etc/systemd/system/multi-user.target.wants/resin-test.service.</span></code></pre></figure>
 
-<p>Keep in mind that enabling a service does not start it in the current session. If you wish to start the service and enable it at boot, you will have to issue both the start and enable commands.</p>
+<p>Puedes verificar si un servicio tiene habilitado el autoarranque con el comando <strong>is-enabled</strong>.</p>
 
-<p>Checking the Status of Services</p>
+<figure class="highlight"><pre><code class="language-console" data-lang="console"><span class="go">sudo systemctl is-enabled resin-test.service</span></code></pre></figure>
 
-<p>To check the status of a service on your system, you can use the status command:</p>
+<div id="id-section7" />
 
-<p>systemctl status application.service
-This will provide you with the service state, the cgroup hierarchy, and the first few log lines.</p>
+<h1 id="verificar-el-estado-de-un-servicio">Verificar el estado de un servicio.</h1>
 
-<p>recargar el si cambia el archivo .service</p>
+<p>Para verificar el estado de un servicio en tu sistema, puede usar el comando <strong>status</strong></p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash">A small HTML snippet</code></pre></figure>
+<figure class="highlight"><pre><code class="language-console" data-lang="console"><span class="gp">juan@juan:~$</span> systemctl status resin-test.service
+<span class="go">● resin-test.service - Resin Test service
+</span><span class="gp">   Loaded: loaded (/etc/systemd/system/resin-test.service;</span> disabled<span class="p">;</span> vendor preset: enabled<span class="o">)</span>
+<span class="gp">   Active: active (running) since sáb 2018-09-19 17:25:50 -03;</span> 45min ago
+<span class="go"> Main PID: 7811 (java)
+   CGroup: /system.slice/resin-test.service
+           ├─7811 /usr/lib/jvm/java-8-oracle/bin/java -Dresin.watchdog=app-0 -Djava.util.logging.manager=com.caucho.log
+           └─7867 /usr/lib/jvm/java-8-oracle/bin/java -Dresin.server=app-0 -Djava.util.logging.manager=com.caucho.log.L
 
+sep 19 17:25:46 juan systemd[1]: Starting Resin Test service...
+sep 19 17:25:47 juan Resin Test[7767]: Resin/4.0.58 launching watchdog at 127.0.0.1:6600
+sep 19 17:25:49 juan Resin Test[7767]: Resin/4.0.58 started -server 'app-0' with watchdog at 127.0.0.1:6600
+sep 19 17:25:50 juan systemd[1]: Started Resin Test service.</span></code></pre></figure>
+
+<div id="id-section8" />
+
+<h1 id="ver-los-registros-del-sistema">Ver los registros del sistema.</h1>
+<p>Finalmente podemos usar <strong>Journalctl</strong> que es la herramienta más utilizada para acceder a los registros del sistema y filtrar los registros pertenecientes a nuestro servicio</p>
+
+<figure class="highlight"><pre><code class="language-console" data-lang="console"><span class="go">journalctl -u resin-test.service</span></code></pre></figure>
+
+<div id="id-section9" />
+
+<h1 id="recursos-útiles">Recursos útiles.</h1>
+
+<p><a href="http://www.caucho.com/">http://www.caucho.com/</a></p>
+
+<p><a href="https://www.digitalocean.com/community/tutorials/understanding-systemd-units-and-unit-files">https://www.digitalocean.com/community/tutorials/understanding-systemd-units-and-unit-files</a></p>
+
+<p><a href="https://wiki.archlinux.org/index.php/Systemd">https://wiki.archlinux.org/index.php/Systemd</a></p>
 
       </article>
     </div>

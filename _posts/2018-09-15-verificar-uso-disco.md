@@ -3,7 +3,7 @@
   title: "Como verificar el uso del disco en linux"
   date:   2018-09-15 17:03:00 +0800
   tags: linux
-  description: "El comando du muestra información sobre el uso del disco de archivos y directorios en Linux."
+  summary: "El comando du muestra información sobre el uso del disco de archivos y directorios en Linux."
 ---
 
 
