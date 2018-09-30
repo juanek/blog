@@ -7,6 +7,16 @@
   <title>Juan E. Kipes Blog</title>
 
   <link rel="stylesheet" href="/css/main.css">
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-126646878-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-126646878-1');
+</script>
+  
 </head>
 
   <body>
@@ -110,6 +120,9 @@
   <a href="mailto:juanekipes@gmail.com">
     <i class="fa fa-envelope fa-2x" ></i>
   </a>
+  <a target="_blank" href="https://ar.pinterest.com/jkipes">
+    <i class="fab fa-pinterest fa-2x"></i>
+  </a>
   <!--<a target="_blank" href="https://twitter.com/">
     <i class="fab fa-twitter fa-2x"></i>
   </a>-->
@@ -134,19 +147,7 @@
  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
   <script type="text/javascript">
     hljs.initHighlightingOnLoad();
-    function applyTiles() {
-      var posts = $('#post');
-      posts.imagesLoaded(function() {
-        $('#post').masonry({ itemSelector : '.post' });;
-      });
-    }
-    $(function() {
-      applyTiles();
-    });
-    $(window).resize(function() {
-      applyTiles();
-    });
-  </script>
+ </script>
 
   </body>
 </html>

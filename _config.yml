@@ -8,7 +8,13 @@ url:
 # Social icons
 show_social_icons: true
 github_username: juanek
+pinterest_username: jkipes
 #twitter_username: juanek
+
+disqus:
+    shortname: juanekipes
+google_analytics: UA-126646878-1
+
 
 # Build settings
 permalink: :title/

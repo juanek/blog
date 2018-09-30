@@ -7,6 +7,16 @@
   <title>Juan E. Kipes Blog</title>
 
   <link rel="stylesheet" href="/css/main.css">
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-126646878-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-126646878-1');
+</script>
+  
 </head>
 
   <body>
@@ -173,6 +183,29 @@ Las unidades son K,M,G,T,P,E,Z,Y (potencias de 1024) o KB,MB, ... (potencias de 
       </article>
     </div>
   </div>
+  
+    
+
+  <div id="disqus_thread"></div>
+  <script>
+    var disqus_config = function () {
+      this.page.url = 'http://localhost:4000/verificar-uso-disco/';
+      this.page.identifier = 'http://localhost:4000/verificar-uso-disco/';
+    };
+
+    (function() {
+      var d = document, s = d.createElement('script');
+
+      s.src = 'https://juanekipes.disqus.com/embed.js';
+
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+
+  
 </div>
 
     <footer class="py-5">
@@ -187,6 +220,9 @@ Las unidades son K,M,G,T,P,E,Z,Y (potencias de 1024) o KB,MB, ... (potencias de 
   </a>
   <a href="mailto:juanekipes@gmail.com">
     <i class="fa fa-envelope fa-2x" ></i>
+  </a>
+  <a target="_blank" href="https://ar.pinterest.com/jkipes">
+    <i class="fab fa-pinterest fa-2x"></i>
   </a>
   <!--<a target="_blank" href="https://twitter.com/">
     <i class="fab fa-twitter fa-2x"></i>
@@ -212,19 +248,7 @@ Las unidades son K,M,G,T,P,E,Z,Y (potencias de 1024) o KB,MB, ... (potencias de 
  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
   <script type="text/javascript">
     hljs.initHighlightingOnLoad();
-    function applyTiles() {
-      var posts = $('#post');
-      posts.imagesLoaded(function() {
-        $('#post').masonry({ itemSelector : '.post' });;
-      });
-    }
-    $(function() {
-      applyTiles();
-    });
-    $(window).resize(function() {
-      applyTiles();
-    });
-  </script>
+ </script>
 
   </body>
 </html>

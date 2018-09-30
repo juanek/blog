@@ -24,16 +24,4 @@
  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
   <script type="text/javascript">
     hljs.initHighlightingOnLoad();
-    function applyTiles() {
-      var posts = $('#post');
-      posts.imagesLoaded(function() {
-        $('#post').masonry({ itemSelector : '.post' });;
-      });
-    }
-    $(function() {
-      applyTiles();
-    });
-    $(window).resize(function() {
-      applyTiles();
-    });
-  </script>
+ </script>

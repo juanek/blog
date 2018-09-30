@@ -1,10 +1,20 @@
-<!DOCTYPE html>
-<html lang="es">
-  {% include head.html %}
-  <body>
-    {% include header.html %}
-    {% include banner.html %}
-    {% include post.html %}
-    {% include footer.html %}
-  </body>
-</html>
+---
+layout: default
+comments: true
+---
+<div id="post" class="container pt-3">
+  <div class="row">
+    <div class="col">
+      <p class="lead text-info">
+        {{ page.date | date: "%b %-d, %Y" }}
+      </p>
+      <h1>{{ page.title }}</h1>
+      <article>
+        {{ content }}
+      </article>
+    </div>
+  </div>
+  {% if site.disqus.shortname %}
+    {% include disqus-comments.html %}
+  {% endif %}
+</div>
