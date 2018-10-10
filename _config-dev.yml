@@ -5,24 +5,26 @@ author:
 description:
 url:
 
-environment: production
-show_drafts: false  
+environment: development
+show_drafts: true
 
 # Social icons
 show_social_icons: true
 github_username: juanek
 pinterest_username: jkipes
-#twitter_username: juanek
 
-disqus:
-    shortname: juanekipes
-google_analytics: UA-126646878-1
-
+markdown: kramdown
+kramdown:
+  input: GFM
+  hard_wrap: false
+  syntax_highlighter_opts:
+    disable : true
 
 # Build settings
 permalink: :title/
 sass:
   sass_dir: css
+  style: full
 
 # plugins
 plugins: [jekyll-paginate]

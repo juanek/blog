@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Juan E. Kipes Blog</title>
+
+  <link rel="stylesheet" href="/css/main.css">
+
+</head>
+
+  <body>
+    <!-- NAV -->
+<nav class="navbar navbar-expand-md navbar-light py-4">
+  <div class="container">
+    <a href="/" class="navbar-brand">
+      <h2 class="d-inline align-middle pl-3 text-primary">Juan E. Kipes</h2>
+    </a>
+    <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a href="/archivos/" class="nav-link">Archivos</a>
+        </li>
+        <li class="nav-item">
+          <a href="/acerca/" class="nav-link">Sobre Mí</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <section id="banner" class="py-5 d-none d-sm-block">
+  <div class="primary-overlay text-white">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12 text-center">
+          <!--<h1 class="display-5 pt-1">
+	      ...un blog para compartir código...
+      </h1>-->
+      </div>
+<!--      <div class="col-md-2"></div>-->
+    </div>
+  </div>
+</section>
+
+    <div id="post" class="container pt-3">
+  <div class="row">
+    <div class="col">
+      <p class="lead text-info">
+        Sep 26, 2018
+      </p>
+      <h1>Ejemplos de estilos markdown y boostrap para los post.</h1>
+      <article>
+        <blockquote>
+  <p>este es</p>
+</blockquote>
+
+<p><code>Easing.SinIn</code> sis i</p>
+
+<pre><code class="language-html"> &lt;a href="#"&gt;Hello world&lt;/a&gt;
+</code></pre>
+
+<figure class="highlight"><pre><code class="language-html" data-lang="html"> <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"#"</span><span class="nt">&gt;</span>Hello world<span class="nt">&lt;/a&gt;</span></code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-shell" data-lang="shell"> <span class="nv">$ </span>sh bin/resin.sh start</code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-shell" data-lang="shell"><span class="nv">$ </span><span class="nb">echo</span> <span class="nv">$EDITOR</span>
+vim
+<span class="nv">$ </span>git checkout master
+Switched to branch <span class="s1">'master'</span>
+Your branch is up-to-date with <span class="s1">'origin/master'</span><span class="nb">.</span>
+<span class="nv">$ </span>git push
+Everything up-to-date
+<span class="nv">$ </span><span class="nb">echo</span> <span class="s1">'All
+&gt; done!'</span>
+All
+<span class="k">done</span><span class="o">!</span></code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="cm">/**
+ * @author John Smith &lt;john.smith@example.com&gt;
+*/</span>
+<span class="kn">package</span> <span class="n">l2f</span><span class="o">.</span><span class="na">gameserver</span><span class="o">.</span><span class="na">model</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">abstract</span> <span class="kd">class</span> <span class="nc">L2Char</span> <span class="kd">extends</span> <span class="n">L2Object</span> <span class="o">{</span>
+  <span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">Short</span> <span class="n">ERROR</span> <span class="o">=</span> <span class="mh">0x0001</span><span class="o">;</span>
+
+  <span class="kd">public</span> <span class="kt">void</span> <span class="nf">moveTo</span><span class="o">(</span><span class="kt">int</span> <span class="n">x</span><span class="o">,</span> <span class="kt">int</span> <span class="n">y</span><span class="o">,</span> <span class="kt">int</span> <span class="n">z</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">_ai</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+    <span class="n">log</span><span class="o">(</span><span class="s">"Should not be called"</span><span class="o">);</span>
+    <span class="k">if</span> <span class="o">(</span><span class="mi">1</span> <span class="o">&gt;</span> <span class="mi">5</span><span class="o">)</span> <span class="o">{</span> <span class="c1">// wtf!?</span>
+      <span class="k">return</span><span class="o">;</span>
+    <span class="o">}</span>
+  <span class="o">}</span>
+<span class="o">}</span></code></pre></figure>
+
+<div class="alert alert-primary" role="alert">
+  This is a primary alert—check it out!
+</div>
+<div class="alert alert-secondary" role="alert">
+  This is a secondary alert—check it out!
+</div>
+<div class="alert alert-success" role="alert">
+  This is a success alert—check it out!
+</div>
+<div class="alert alert-danger" role="alert">
+  This is a danger alert—check it out!
+</div>
+<div class="alert alert-warning" role="alert">
+  This is a warning alert—check it out!
+</div>
+<div class="alert alert-info" role="alert">
+  This is a info alert—check it out!
+</div>
+<div class="alert alert-light" role="alert">
+  This is a light alert—check it out!
+</div>
+<div class="alert alert-dark" role="alert">
+  This is a dark alert—check it out!
+</div>
+
+<div class="bs-callout bs-callout-default">
+  <h4>Default Callout</h4>
+  This is a default callout.
+</div>
+
+<div class="bs-callout bs-callout-primary">
+  <h4>Primary Callout</h4>
+  This is a primary callout.
+</div>
+
+<div class="bs-callout bs-callout-success">
+  <h4>Success Callout</h4>
+  This is a success callout.
+</div>
+
+<div class="bs-callout bs-callout-info">
+  <h4>Info Callout</h4>
+  This is an info callout.
+</div>
+
+<div class="bs-callout bs-callout-warning">
+  <h4>Warning Callout</h4>
+  This is a warning callout.
+</div>
+
+<div class="bs-callout bs-callout-danger">
+  <h4>Danger Callout</h4>
+  This is a danger callout.
+</div>
+
+<div class="bs-callout bs-callout-success">
+<h3>Contenido</h3>
+<ul class="list-unstyled">
+  <li><a href="#id-section1">1 - Crear proyectos en modo interactivo.</a></li>
+  <li><a href="#id-section2">2 - Crear proyectos en modo no-interactivo.</a></li>
+  <li><a href="#id-section3">3 - Crear arquetipos desde un proyecto.</a></li>
+  <li><a href="#id-section4">4- Construir y compilar proyectos..</a></li>
+  <li><a href="#id-section5">5 - Ejecutar programas.</a></li>
+  <li><a href="#id-section6">6 - Ejecutar pruebas.</a></li>
+  <li><a href="#id-conclusiones">Conclusiones</a></li>
+  <li><a href="#id-referencias">Referencias</a></li>
+</ul>
+</div>
+
+<div id="id-section1" />
+
+<h2 id="1---crear-proyectos-en-modo-interactivo">1 - Crear proyectos en modo interactivo.</h2>
+
+<div id="id-section2" />
+
+<h2 id="2---crear-proyectos-en-modo-no-interactivo">2 - Crear proyectos en modo no-interactivo.</h2>
+
+<div id="id-section3" />
+
+<h2 id="3---crear-arquetipos-desde-un-proyecto">3 - Crear arquetipos desde un proyecto.</h2>
+
+<div id="id-section4" />
+
+<h2 id="4---construir-y-compilar-proyectos">4 - Construir y compilar proyectos.</h2>
+
+<div id="id-section5" />
+
+<h2 id="5---ejecutar-programas">5 - Ejecutar programas.</h2>
+
+<div id="id-section6" />
+
+<h2 id="6---ejecutar-pruebas">6 - Ejecutar pruebas.</h2>
+
+<div id="id-conclusiones" />
+
+<h2 id="conclusiones">Conclusiones.</h2>
+
+<div id="id-referencias" />
+
+<h2 id="referencias">Referencias.</h2>
+
+      </article>
+    </div>
+  </div>
+  
+</div>
+
+    <footer class="py-5">
+  <hr>
+  <div class="container text-center text-info">
+    <div class="row">
+      <div class="col">
+        
+          <div class="social-links">
+  <a target="_blank" href="https://github.com/juanek">
+    <i class="fab fa-github fa-2x"></i>
+  </a>
+  <a href="mailto:juanekipes@gmail.com">
+    <i class="fa fa-envelope fa-2x" ></i>
+  </a>
+  <a target="_blank" href="https://ar.pinterest.com/jkipes">
+    <i class="fab fa-pinterest fa-2x"></i>
+  </a>
+  <!--<a target="_blank" href="https://twitter.com/">
+    <i class="fab fa-twitter fa-2x"></i>
+  </a>-->
+</div>
+
+        
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        Juan E. Kipes &copy; 2018.
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- JS -->
+<script defer src="https://use.fontawesome.com/releases/v5.0.8/js/all.js" integrity="sha384-SlE991lGASHoBfWbelyBPLsUlwY1GwNDJo3jSJO04KZ33K2bwfV9YBauFfnzvynJ" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+ <script src="//cdnjs.cloudflare.com/ajax/libs/highlightjs-line-numbers.js/2.4.0/highlightjs-line-numbers.min.js"></script>
+  <script type="text/javascript">
+    hljs.initHighlightingOnLoad();
+    hljs.initLineNumbersOnLoad();
+ </script>
+
+  </body>
+</html>

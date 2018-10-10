@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Juan E. Kipes Blog</title>
+
+  <link rel="stylesheet" href="/css/main.css">
+
+</head>
+
+  <body>
+    <!-- NAV -->
+<nav class="navbar navbar-expand-md navbar-light py-4">
+  <div class="container">
+    <a href="/" class="navbar-brand">
+      <h2 class="d-inline align-middle pl-3 text-primary">Juan E. Kipes</h2>
+    </a>
+    <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a href="/archivos/" class="nav-link">Archivos</a>
+        </li>
+        <li class="nav-item">
+          <a href="/acerca/" class="nav-link">Sobre Mí</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <section id="banner" class="py-5 d-none d-sm-block">
+  <div class="primary-overlay text-white">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12 text-center">
+          <!--<h1 class="display-5 pt-1">
+	      ...un blog para compartir código...
+      </h1>-->
+      </div>
+<!--      <div class="col-md-2"></div>-->
+    </div>
+  </div>
+</section>
+
+    <div id="post" class="container pt-3">
+  <div class="row">
+    <div class="col">
+      <p class="lead text-info">
+        Sep 26, 2018
+      </p>
+      <h1>Cómo crear proyectos y arquetipos con Maven.</h1>
+      <article>
+        <p>En esta guía vamos a crear proyectos Java con Maven directamente desde la consola de comandos de manera interactiva y no-interactiva.
+Además, generaremos un arquetipo desde un proyecto existente.</p>
+
+<div class="bs-callout bs-callout-success">
+<h3>Contenido</h3>
+<ul class="list-unstyled">
+  <li><a href="#id-section1">1 - Crear proyectos en modo interactivo.</a></li>
+  <li><a href="#id-section2">2 - Crear proyectos en modo no-interactivo.</a></li>
+  <li><a href="#id-section3">3 - Crear arquetipos desde un proyecto.</a></li>
+  <li><a href="#id-section4">4 - Compilar y construir proyectos.</a></li>
+  <li><a href="#id-section5">5 - Ejecutar programas.</a></li>
+  <li><a href="#id-section6">6 - Ejecutar pruebas.</a></li>
+  <li><a href="#id-conclusiones">Conclusiones.</a></li>
+  <li><a href="#id-referencias">Referencias.</a></li>
+</ul>
+</div>
+
+<div id="id-section1" />
+
+<h2 id="1---crear-proyectos-en-modo-interactivo">1 - Crear proyectos en modo interactivo.</h2>
+<p>Para crear un proyecto en modo interactivo usamos el comando</p>
+
+<figure class="highlight"><pre><code class="language-console" data-lang="console"><span class="gp">$</span> mvn archetype:generate</code></pre></figure>
+
+<p>Este comando nos listará los arquetipos disponibles y nos mostrará en consola el prompt solicitando ingresar el número de arquetipo o algun filtro, por ejemplo <em>“quickstart”</em> para que nos muestre todos los arquetipos que contengan este filtro.</p>
+
+<p>Por defecto, Maven nos seleccionará el arquetipo que contiene un ejemplo de proyecto Maven, en este caso es el 1255.  <em>Enter</em> y seleccionamos la opción por defecto.</p>
+
+<figure class="highlight"><pre><code class="language-console" data-lang="console"><span class="go"> Choose a number or apply filter (format: [groupId:]artifactId, case sensitive contains): 1255:</span></code></pre></figure>
+
+<p>Posteriormente debemos especificar <strong>groupId</strong>, <strong>artifactId</strong>, <strong>version</strong> y <strong>package</strong>.</p>
+
+<p>Maven nos generará un proyecto con la siguiente estructura.</p>
+
+<figure class="highlight"><pre><code class="language-console" data-lang="console"><span class="gp">$</span> tree
+<span class="c">.
+</span><span class="go">├── pom.xml
+└── src
+    ├── main
+    │   └── java
+    │       └── ar
+    │           └── com
+    │               └── jekipes
+    │                   └── App.java
+    └── test
+        └── java
+            └── ar
+                └── com
+                    └── jekipes
+                        └── AppTest.java
+
+11 directories, 3 files</span></code></pre></figure>
+
+<p>Y el correspondiente descriptor del proyecto <strong>pom.xml</strong></p>
+
+<figure class="highlight"><pre><code class="language-xml" data-lang="xml"><span class="nt">&lt;project</span> <span class="na">xmlns=</span><span class="s">"http://maven.apache.org/POM/4.0.0"</span> <span class="na">xmlns:xsi=</span><span class="s">"http://www.w3.org/2001/XMLSchema-instance"</span>
+  <span class="na">xsi:schemaLocation=</span><span class="s">"http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;modelVersion&gt;</span>4.0.0<span class="nt">&lt;/modelVersion&gt;</span>
+  <span class="nt">&lt;groupId&gt;</span>ar.com.jekipes<span class="nt">&lt;/groupId&gt;</span>
+  <span class="nt">&lt;artifactId&gt;</span>MavenQuickstart<span class="nt">&lt;/artifactId&gt;</span>
+  <span class="nt">&lt;packaging&gt;</span>jar<span class="nt">&lt;/packaging&gt;</span>
+  <span class="nt">&lt;version&gt;</span>1.0-SNAPSHOT<span class="nt">&lt;/version&gt;</span>
+  <span class="nt">&lt;name&gt;</span>MavenQuickstart<span class="nt">&lt;/name&gt;</span>
+  <span class="nt">&lt;url&gt;</span>http://maven.apache.org<span class="nt">&lt;/url&gt;</span>
+  <span class="nt">&lt;dependencies&gt;</span>
+    <span class="nt">&lt;dependency&gt;</span>
+      <span class="nt">&lt;groupId&gt;</span>junit<span class="nt">&lt;/groupId&gt;</span>
+      <span class="nt">&lt;artifactId&gt;</span>junit<span class="nt">&lt;/artifactId&gt;</span>
+      <span class="nt">&lt;version&gt;</span>3.8.1<span class="nt">&lt;/version&gt;</span>
+      <span class="nt">&lt;scope&gt;</span>test<span class="nt">&lt;/scope&gt;</span>
+    <span class="nt">&lt;/dependency&gt;</span>
+  <span class="nt">&lt;/dependencies&gt;</span>
+<span class="nt">&lt;/project&gt;</span></code></pre></figure>
+
+<div id="id-section2" />
+
+<h2 id="2---crear-proyectos-en-modo-no-interactivo">2 - Crear proyectos en modo no-interactivo.</h2>
+<p>La otra forma de generar proyectos es el modo no-interactivo o batch, especificando los parámetros en el mismo comando</p>
+
+<figure class="highlight"><pre><code class="language-console" data-lang="console"><span class="gp">$</span> mvn archetype:generate <span class="nt">-DgroupId</span><span class="o">=</span>ar.com.jekipes <span class="nt">-DartifactId</span><span class="o">=</span>MavenQuickstart <span class="nt">-DarchetypeArtifactId</span><span class="o">=</span>maven-archetype-quickstart <span class="nt">-DinteractiveMode</span><span class="o">=</span><span class="nb">false</span></code></pre></figure>
+
+<p>Los parámetros para este comando <strong>archetype:generate</strong> son:</p>
+<ul>
+  <li><strong>groupId</strong>: es el identificador de paquetes de tu proyecto dentro de todos los proyectos. Sigue las reglas del nombrado de paquetes en Java.</li>
+  <li><strong>artefactId</strong>: define el nombre de proyecto.</li>
+  <li><strong>archetypeArtifactId</strong>: define el nombre del arquetipo.</li>
+  <li><strong>interactiveMode</strong>: <strong>false</strong> para usar el modo no-interactivo.</li>
+</ul>
+
+<p>De esta forma obtendremos un proyecto similar al que generamos arriba.</p>
+
+<div id="id-section3" />
+
+<h2 id="3---crear-arquetipos-desde-un-proyecto">3 - Crear arquetipos desde un proyecto.</h2>
+<p>Ahora ya sabemos como crear proyectos Java con Maven a partir de los arquetipos que nos provve Maven. Pero también podemos crear nuestros propios arquetipos que generen proyectos con la estructura y dependencias que necesitemos.
+Vamos a ver un ejemplo sencillo, de crear un arquetipo desde un proyecto existente.
+El ejemplo anterior lo modificamos para poder crear un arquetipos que genere proyectos cosn la librería JUnit 4 y esté configurado para trabajar con logback.</p>
+
+<p>Para ello modificamos el <strong>pom.xml</strong> y agregamos las dependencias</p>
+
+<figure class="highlight"><pre><code class="language-xml" data-lang="xml"><span class="nt">&lt;project</span> <span class="na">xmlns=</span><span class="s">"http://maven.apache.org/POM/4.0.0"</span> <span class="na">xmlns:xsi=</span><span class="s">"http://www.w3.org/2001/XMLSchema-instance"</span> <span class="na">xsi:schemaLocation=</span><span class="s">"http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;modelVersion&gt;</span>4.0.0<span class="nt">&lt;/modelVersion&gt;</span>
+  <span class="nt">&lt;groupId&gt;</span>ar.com.jekipes<span class="nt">&lt;/groupId&gt;</span>
+  <span class="nt">&lt;artifactId&gt;</span>MavenQuickstart<span class="nt">&lt;/artifactId&gt;</span>
+  <span class="nt">&lt;packaging&gt;</span>jar<span class="nt">&lt;/packaging&gt;</span>
+  <span class="nt">&lt;version&gt;</span>1.0-SNAPSHOT<span class="nt">&lt;/version&gt;</span>
+  <span class="nt">&lt;name&gt;</span>MavenQuickstart<span class="nt">&lt;/name&gt;</span>
+  <span class="nt">&lt;url&gt;</span>http://maven.apache.org<span class="nt">&lt;/url&gt;</span>
+  <span class="nt">&lt;dependencies&gt;</span>
+    <span class="nt">&lt;dependency&gt;</span>
+      <span class="nt">&lt;groupId&gt;</span>ch.qos.logback<span class="nt">&lt;/groupId&gt;</span>
+      <span class="nt">&lt;artifactId&gt;</span>logback-classic<span class="nt">&lt;/artifactId&gt;</span>
+      <span class="nt">&lt;version&gt;</span>1.2.3<span class="nt">&lt;/version&gt;</span>
+      <span class="nt">&lt;scope&gt;</span>runtime<span class="nt">&lt;/scope&gt;</span>
+    <span class="nt">&lt;/dependency&gt;</span>
+    <span class="nt">&lt;dependency&gt;</span>
+      <span class="nt">&lt;groupId&gt;</span>org.slf4j<span class="nt">&lt;/groupId&gt;</span>
+      <span class="nt">&lt;artifactId&gt;</span>slf4j-api<span class="nt">&lt;/artifactId&gt;</span>
+      <span class="nt">&lt;version&gt;</span>1.7.25<span class="nt">&lt;/version&gt;</span>
+    <span class="nt">&lt;/dependency&gt;</span>
+    <span class="nt">&lt;dependency&gt;</span>
+      <span class="nt">&lt;groupId&gt;</span>junit<span class="nt">&lt;/groupId&gt;</span>
+      <span class="nt">&lt;artifactId&gt;</span>junit<span class="nt">&lt;/artifactId&gt;</span>
+      <span class="nt">&lt;version&gt;</span>4.12<span class="nt">&lt;/version&gt;</span>
+      <span class="nt">&lt;scope&gt;</span>test<span class="nt">&lt;/scope&gt;</span>
+    <span class="nt">&lt;/dependency&gt;</span>
+  <span class="nt">&lt;/dependencies&gt;</span>
+<span class="nt">&lt;/project&gt;</span></code></pre></figure>
+
+<p>Para agregar el archivo de configuración de logs de Logback, creamos un nuevo directorio resources.</p>
+
+<figure class="highlight"><pre><code class="language-console" data-lang="console"><span class="gp">$</span> <span class="nb">mkdir</span> <span class="nt">-p</span> src/test/resources
+<span class="gp">$</span> <span class="nb">touch </span>src/test/resources/logback-test.xml</code></pre></figure>
+
+<p>Un simple archivo de configuración para logback <strong>logback-test.xml</strong>.</p>
+
+<figure class="highlight"><pre><code class="language-xml" data-lang="xml"><span class="nt">&lt;configuration&gt;</span>
+    <span class="nt">&lt;appender</span> <span class="na">name=</span><span class="s">"console"</span> <span class="na">class=</span><span class="s">"ch.qos.logback.core.ConsoleAppender"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;target&gt;</span>System.out<span class="nt">&lt;/target&gt;</span>
+        <span class="nt">&lt;encoder&gt;</span>
+            <span class="nt">&lt;pattern&gt;</span>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n<span class="nt">&lt;/pattern&gt;</span>
+        <span class="nt">&lt;/encoder&gt;</span>
+    <span class="nt">&lt;/appender&gt;</span>
+    <span class="nt">&lt;root</span> <span class="na">level=</span><span class="s">"info"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;appender-ref</span> <span class="na">ref=</span><span class="s">"console"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/root&gt;</span>
+<span class="nt">&lt;/configuration&gt;</span></code></pre></figure>
+
+<p>Actualizamos la clase de test <strong>AppTest.java</strong> para que soporte <strong>JUnit 4</strong>.</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kn">package</span> <span class="n">ar</span><span class="o">.</span><span class="na">com</span><span class="o">.</span><span class="na">jekipes</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">static</span> <span class="n">org</span><span class="o">.</span><span class="na">junit</span><span class="o">.</span><span class="na">Assert</span><span class="o">.</span><span class="na">assertTrue</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.junit.Test</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.slf4j.LoggerFactory</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.slf4j.Logger</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">AppTest</span> <span class="o">{</span>
+  <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">Logger</span> <span class="n">logger</span> <span class="o">=</span> <span class="n">LoggerFactory</span><span class="o">.</span><span class="na">getLogger</span><span class="o">(</span><span class="n">AppTest</span><span class="o">.</span><span class="na">class</span><span class="o">.</span><span class="na">getSimpleName</span><span class="o">());</span>
+  <span class="nd">@Test</span>
+  <span class="kd">public</span> <span class="kt">void</span> <span class="nf">evalTest</span><span class="o">()</span> <span class="o">{</span>
+	<span class="n">logger</span><span class="o">.</span><span class="na">info</span><span class="o">(</span><span class="s">"hello test!!!"</span><span class="o">);</span>
+        <span class="n">assertTrue</span><span class="o">(</span> <span class="kc">true</span> <span class="o">);</span>
+  <span class="o">}</span>
+<span class="o">}</span></code></pre></figure>
+
+<p>Ahora generamos el arquetipo con el comando</p>
+
+<figure class="highlight"><pre><code class="language-console" data-lang="console"><span class="gp">$</span> mvn archetype:create-from-project
+<span class="go">[INFO] Scanning for projects...
+[INFO]
+[INFO] ------------------------------------------------------------------------
+[INFO] Building MavenQuickstart 1.0-SNAPSHOT
+[INFO] ------------------------------------------------------------------------
+[INFO]
+</span><span class="gp">[INFO] &gt;</span><span class="o">&gt;&gt;</span> maven-archetype-plugin:3.0.1:create-from-project <span class="o">(</span>default-cli<span class="o">)</span> <span class="o">&gt;</span> generate-sources @ MavenQuickstart <span class="o">&gt;&gt;&gt;</span>
+<span class="go">[INFO]
+[INFO] &lt;&lt;&lt; maven-archetype-plugin:3.0.1:create-from-project (default-cli) &lt; generate-sources @ MavenQuickstart &lt;&lt;&lt;
+[INFO]
+[INFO] --- maven-archetype-plugin:3.0.1:create-from-project (default-cli) @ MavenQuickstart ---
+[INFO] Setting default groupId: ar.com.jekipes
+[INFO] Setting default artifactId: MavenQuickstart
+[INFO] Setting default version: 1.0-SNAPSHOT
+[INFO] Setting default package: ar.com.jekipes
+[INFO] Scanning for projects...
+[INFO] ...
+[INFO] ------------------------------------------------------------------------
+[INFO] Archetype project created in /home/juan/tuto/MavenQuickstart/target/generated-sources/archetype
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------</span></code></pre></figure>
+
+<div class="bs-callout bs-callout-warning">
+Nos interesa recordar <b>groupId</b>, <b>artifactId</b> y <b>version</b> de nuestro nuevo arquetipo, ya que luego estos parámetros son requeridos para la generación de nuevos proyectos.
+</div>
+
+<p>Instalamos el arquetipo generado en nuestro repositorio local.</p>
+
+<figure class="highlight"><pre><code class="language-console" data-lang="console"><span class="gp">$</span> <span class="nb">cd </span>target/generated-sources/archetype/
+<span class="gp">$</span> mvn <span class="nb">install</span></code></pre></figure>
+
+<p>Ahora ya podemos crear nuevos proyectos desde nuestro arquetipo.</p>
+
+<figure class="highlight"><pre><code class="language-console" data-lang="console"><span class="go">mvn archetype:generate -DarchetypeGroupId=ar.com.jekipes -DarchetypeArtifactId=MavenQuickstart-archetype -DarchetypeVersion=1.0-SNAPSHOT -DgroupId=ar.com.jekipes -DartifactId=logback-quickstart -DinteractiveMode=false</span></code></pre></figure>
+
+<div class="bs-callout bs-callout-warning">
+Observa los parámetros que identifican el arquetipo.
+<ul class="list-unstyled">
+<li>-D<b>archetypeGroupId</b>=ar.com.jekipes</li>
+<li>-D<b>archetypeArtifactId</b>=MavenQuickstart-archetype</li>
+<li>-D<b>archetypeVersion</b>=1.0-SNAPSHOT</li>
+</ul>
+</div>
+<p>La estructura deseada de nuestro proyecto.</p>
+
+<figure class="highlight"><pre><code class="language-console" data-lang="console"><span class="gp">$</span> tree logback-quickstart
+<span class="go">logback-quickstart
+├── pom.xml
+└── src
+    ├── main
+    │   └── java
+    │       └── ar
+    │           └── com
+    │               └── jekipes
+    │                   └── App.java
+    └── test
+        ├── java
+        │   └── ar
+        │       └── com
+        │           └── jekipes
+        │               └── AppTest.java
+        └── resources
+            └── logback-test.xml
+
+12 directories, 4 files</span></code></pre></figure>
+
+<p>Y sus dependencias.</p>
+
+<figure class="highlight"><pre><code class="language-console" data-lang="console"><span class="gp">$</span> mvn dependency:tree
+<span class="go">[INFO] Scanning for projects...
+[INFO]
+[INFO] ------------------------------------------------------------------------
+[INFO] Building logback-quickstart 1.0-SNAPSHOT
+[INFO] ------------------------------------------------------------------------
+[INFO]
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ logback-quickstart ---
+[INFO] ar.com.jekipes:logback-quickstart:jar:1.0-SNAPSHOT
+[INFO] +- ch.qos.logback:logback-classic:jar:1.2.3:runtime
+[INFO] |  \- ch.qos.logback:logback-core:jar:1.2.3:runtime
+[INFO] +- org.slf4j:slf4j-api:jar:1.7.25:compile
+[INFO] \- junit:junit:jar:4.12:test
+[INFO]    \- org.hamcrest:hamcrest-core:jar:1.3:test
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------</span></code></pre></figure>
+
+<div id="id-section4" />
+
+<h2 id="4---compilar-y-construir-proyectos">4 - Compilar y construir proyectos.</h2>
+<p>Maven se basa en el concepto de ciclo de vida de construcción de un proyecto. De manera que el proceso para construir y distribuir un proyecto esta claramente definido.</p>
+
+<p>Hay tres ciclos de vida para la construcción de proyectos proyectos predefinidos, el ciclo de limpieza, el ciclo por defecto o de construcción y el ciclo de generación de la documentación.</p>
+
+<p>Cada uno de estos ciclos está constituído por fases, donde cada fase representa un estado en el ciclo de vida de construcción del proyecto.</p>
+
+<p><img src="/img/ciclo-maven.svg" alt="Ciclo de Maven" /></p>
+
+<p>Por ejemplo, el ciclo de vida <strong>Default</strong> comprende las siguientes fases</p>
+
+<p>validate - validate the project is correct and all necessary information is available
+compile - compile the source code of the project
+test - test the compiled source code using a suitable unit testing framework. These tests should not require the code be packaged or deployed
+package - take the compiled code and package it in its distributable format, such as a JAR.
+verify - run any checks on results of integration tests to ensure quality criteria are met
+install - install the package into the local repository, for use as a dependency in other projects locally
+deploy - done in the build environment, copies the final package to the remote repository for sharing with other developers and projects.
+Estas fases (además de otras que no se muestran en este listado) son ejecutadas secuencialmente para completar el ciclo de vida <strong>Default</strong>.</p>
+
+<p>Para empaquetar el proyecto e instalarlo en el repositorio local se puede usar</p>
+
+<figure class="highlight"><pre><code class="language-console" data-lang="console"><span class="gp">$</span> mvn <span class="nb">install</span></code></pre></figure>
+
+<p>Este comando ejecuta cada una de las fases del ciclo de vida <strong>Default</strong> en orden (validate, compile, package, etc.) antes de ejecutar la fase install.</p>
+
+<p>Puedes combinar fases de los ciclos de vida <strong>Clean</strong> y <strong>Default</strong>, para limpiar el proyecto eliminando lo generado  anteriormente en <strong>/target</strong> y compilar y crear un jar del proyecto con</p>
+
+<figure class="highlight"><pre><code class="language-console" data-lang="console"><span class="gp">$</span> mvn clean package</code></pre></figure>
+
+<div id="id-section5" />
+
+<h2 id="5---ejecutar-programas-con-maven">5 - Ejecutar programas con Maven.</h2>
+<p>Puedes el proyecto compilado y empaquetado anteriormente con</p>
+
+<figure class="highlight"><pre><code class="language-console" data-lang="console"><span class="gp">$</span> java <span class="nt">-cp</span> target/logback-quickstart-1.0-SNAPSHOT.jar ar.com.jekipes.App
+<span class="go">Hello World!</span></code></pre></figure>
+
+<div id="id-section6" />
+
+<h2 id="6---ejecutar-pruebas-con-maven">6 - Ejecutar pruebas con Maven.</h2>
+
+<figure class="highlight"><pre><code class="language-console" data-lang="console"><span class="go">En la fase de test puedes invocar una prueba en particular con
+</span><span class="gp">$</span> mvn <span class="nt">-Dtest</span><span class="o">=</span>ar.com.jekipes.AppTest <span class="nb">test</span>
+<span class="c">...
+</span><span class="go">-------------------------------------------------------
+ T E S T S
+-------------------------------------------------------
+Running ar.com.jekipes.AppTest
+22:15:57.555 [main] INFO  AppTest - hello test!!!
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.521 sec - in ar.com.jekipes.AppTest</span></code></pre></figure>
+
+<div id="id-conclusiones" />
+
+<h2 id="conclusiones">Conclusiones.</h2>
+<p>En esta guía hemos visto las principales características de Apache Maven y como usarlas desde la linea de comandos para generar arquetipos y proyectos.
+El código fuente utilizado para este ejemplo lo puedes encontrar en <a href="https://github.com/juanek">Repositorio GitHub</a></p>
+
+<div id="id-referencias" />
+
+<h2 id="referencias">Referencias.</h2>
+<p><a href="https://maven.apache.org/guides/getting-started/maven-in-five-minutes.html">https://maven.apache.org/guides/getting-started/maven-in-five-minutes.html</a></p>
+
+<p><a href="https://maven.apache.org/guides/mini/guide-naming-conventions.html">https://maven.apache.org/guides/mini/guide-naming-conventions.html</a></p>
+
+<p><a href="https://docs.oracle.com/javase/specs/jls/se6/html/packages.html#7.7">https://docs.oracle.com/javase/specs/jls/se6/html/packages.html#7.7</a></p>
+
+<p><a href="http://maven.apache.org/guides/introduction/introduction-to-the-lifecycle.html">http://maven.apache.org/guides/introduction/introduction-to-the-lifecycle.html</a></p>
+
+      </article>
+    </div>
+  </div>
+  
+</div>
+
+    <footer class="py-5">
+  <hr>
+  <div class="container text-center text-info">
+    <div class="row">
+      <div class="col">
+        
+          <div class="social-links">
+  <a target="_blank" href="https://github.com/juanek">
+    <i class="fab fa-github fa-2x"></i>
+  </a>
+  <a href="mailto:juanekipes@gmail.com">
+    <i class="fa fa-envelope fa-2x" ></i>
+  </a>
+  <a target="_blank" href="https://ar.pinterest.com/jkipes">
+    <i class="fab fa-pinterest fa-2x"></i>
+  </a>
+  <!--<a target="_blank" href="https://twitter.com/">
+    <i class="fab fa-twitter fa-2x"></i>
+  </a>-->
+</div>
+
+        
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        Juan E. Kipes &copy; 2018.
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- JS -->
+<script defer src="https://use.fontawesome.com/releases/v5.0.8/js/all.js" integrity="sha384-SlE991lGASHoBfWbelyBPLsUlwY1GwNDJo3jSJO04KZ33K2bwfV9YBauFfnzvynJ" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+ <script src="//cdnjs.cloudflare.com/ajax/libs/highlightjs-line-numbers.js/2.4.0/highlightjs-line-numbers.min.js"></script>
+  <script type="text/javascript">
+    hljs.initHighlightingOnLoad();
+    hljs.initLineNumbersOnLoad();
+ </script>
+
+  </body>
+</html>

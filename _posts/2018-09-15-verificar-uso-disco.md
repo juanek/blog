@@ -9,9 +9,9 @@
 
 Para ontener información del uso del disco de archivos y directorios de sistemas UNIX/LINUX podemos usar el comando **du (Disk Usage)** .
 
-Algunos de los comandos **du** con combinación de opciones que nos ayudarán a encontrar esta información.
+Estos son algunos de los comandos **du** con combinación de opciones que nos ayudarán a encontrar esta información.
 
-Obtener el tamaño de todos los archivos y sub directorios recursivamente, en formato legible del directorio __/home/juan/Documentos/cursoPython/__ con un indicador del tamaño de total de uso al final.
+- Obtener el tamaño de todos los archivos y sub directorios recursivamente, en formato legible del directorio __/home/juan/Documentos/cursoPython/__ con un indicador del tamaño de total de uso al final.
 
 {% highlight console %}
 juan@juan:~$ du -ahc  /home/juan/Documentos/cursoPython/
@@ -27,7 +27,7 @@ juan@juan:~$ du -ahc  /home/juan/Documentos/cursoPython/
 1008K	total
 {% endhighlight %}
 
-Cuando el árbol de directorios sobre el que necesitamos obtener irnformación es grande, podemos limitar su profundidad  con la opción __--max-depth=__
+- Cuando el árbol de directorios sobre el que necesitamos obtener irnformación es grande, podemos limitar su profundidad  con la opción __--max-depth=__
 
 {% highlight console %}
 juan@juan:~$ du -ahc --max-depth=1 /home/juan/bitbucket/java/
@@ -43,7 +43,7 @@ juan@juan:~$ du -ahc --max-depth=1 /home/juan/bitbucket/java/
 2,0M	total
 {% endhighlight %}
 
-Si sólo queremos obtener información de los directorios podemos usar.
+- Si sólo queremos obtener información de los directorios podemos usar.
 
 {% highlight console %}
 juan@juan:~$ du -hc --max-depth=1 /home/juan/bitbucket/java/
@@ -57,7 +57,7 @@ juan@juan:~$ du -hc --max-depth=1 /home/juan/bitbucket/java/
 2,0M	total
 {% endhighlight %}
 
-Podemos ver más opciones de este comando con **du --help**
+- Podemos ver más opciones de este comando con **du --help**
 {% highlight console %}
 juan@juan:~$ du --help
 Modo de empleo: du [OPCIÓN]... [FICHERO]...

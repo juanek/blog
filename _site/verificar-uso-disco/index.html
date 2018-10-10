@@ -8,15 +8,6 @@
 
   <link rel="stylesheet" href="/css/main.css">
 
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-126646878-1"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'UA-126646878-1');
-</script>
-  
 </head>
 
   <body>
@@ -66,9 +57,11 @@
       <article>
         <p>Para ontener información del uso del disco de archivos y directorios de sistemas UNIX/LINUX podemos usar el comando <strong>du (Disk Usage)</strong> .</p>
 
-<p>Algunos de los comandos <strong>du</strong> con combinación de opciones que nos ayudarán a encontrar esta información.</p>
+<p>Estos son algunos de los comandos <strong>du</strong> con combinación de opciones que nos ayudarán a encontrar esta información.</p>
 
-<p>Obtener el tamaño de todos los archivos y sub directorios recursivamente, en formato legible del directorio <strong>/home/juan/Documentos/cursoPython/</strong> con un indicador del tamaño de total de uso al final.</p>
+<ul>
+  <li>Obtener el tamaño de todos los archivos y sub directorios recursivamente, en formato legible del directorio <strong>/home/juan/Documentos/cursoPython/</strong> con un indicador del tamaño de total de uso al final.</li>
+</ul>
 
 <figure class="highlight"><pre><code class="language-console" data-lang="console"><span class="gp">juan@juan:~$</span> <span class="nb">du</span> <span class="nt">-ahc</span>  /home/juan/Documentos/cursoPython/
 <span class="go">0	/home/juan/Documentos/cursoPython/tutorial/ejercicio2.py
@@ -82,7 +75,9 @@
 1008K	/home/juan/Documentos/cursoPython/
 1008K	total</span></code></pre></figure>
 
-<p>Cuando el árbol de directorios sobre el que necesitamos obtener irnformación es grande, podemos limitar su profundidad  con la opción <strong>–max-depth=</strong></p>
+<ul>
+  <li>Cuando el árbol de directorios sobre el que necesitamos obtener irnformación es grande, podemos limitar su profundidad  con la opción <strong>–max-depth=</strong></li>
+</ul>
 
 <figure class="highlight"><pre><code class="language-console" data-lang="console"><span class="gp">juan@juan:~$</span> <span class="nb">du</span> <span class="nt">-ahc</span> <span class="nt">--max-depth</span><span class="o">=</span>1 /home/juan/bitbucket/java/
 <span class="go">448K	/home/juan/bitbucket/java/CalculatorWS_Client_Application.
@@ -96,7 +91,9 @@
 2,0M	/home/juan/bitbucket/java/
 2,0M	total</span></code></pre></figure>
 
-<p>Si sólo queremos obtener información de los directorios podemos usar.</p>
+<ul>
+  <li>Si sólo queremos obtener información de los directorios podemos usar.</li>
+</ul>
 
 <figure class="highlight"><pre><code class="language-console" data-lang="console"><span class="gp">juan@juan:~$</span> <span class="nb">du</span> <span class="nt">-hc</span> <span class="nt">--max-depth</span><span class="o">=</span>1 /home/juan/bitbucket/java/
 <span class="go">448K	/home/juan/bitbucket/java/CalculatorWS_Client_Application.
@@ -108,7 +105,9 @@
 2,0M	/home/juan/bitbucket/java/
 2,0M	total</span></code></pre></figure>
 
-<p>Podemos ver más opciones de este comando con <strong>du –help</strong></p>
+<ul>
+  <li>Podemos ver más opciones de este comando con <strong>du –help</strong></li>
+</ul>
 
 <figure class="highlight"><pre><code class="language-console" data-lang="console"><span class="gp">juan@juan:~$</span> <span class="nb">du</span> <span class="nt">--help</span>
 <span class="go">Modo de empleo: du [OPCIÓN]... [FICHERO]...
@@ -184,28 +183,6 @@ Las unidades son K,M,G,T,P,E,Z,Y (potencias de 1024) o KB,MB, ... (potencias de 
     </div>
   </div>
   
-    
-
-  <div id="disqus_thread"></div>
-  <script>
-    var disqus_config = function () {
-      this.page.url = 'http://localhost:4000/verificar-uso-disco/';
-      this.page.identifier = 'http://localhost:4000/verificar-uso-disco/';
-    };
-
-    (function() {
-      var d = document, s = d.createElement('script');
-
-      s.src = 'https://juanekipes.disqus.com/embed.js';
-
-      s.setAttribute('data-timestamp', +new Date());
-      (d.head || d.body).appendChild(s);
-    })();
-  </script>
-  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
-
-
-  
 </div>
 
     <footer class="py-5">
@@ -234,7 +211,7 @@ Las unidades son K,M,G,T,P,E,Z,Y (potencias de 1024) o KB,MB, ... (potencias de 
     </div>
     <div class="row">
       <div class="col">
-        Todo el contenido es copyright Juan E. Kipes &copy; 2018.
+        Juan E. Kipes &copy; 2018.
       </div>
     </div>
   </div>
@@ -246,8 +223,10 @@ Las unidades son K,M,G,T,P,E,Z,Y (potencias de 1024) o KB,MB, ... (potencias de 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+ <script src="//cdnjs.cloudflare.com/ajax/libs/highlightjs-line-numbers.js/2.4.0/highlightjs-line-numbers.min.js"></script>
   <script type="text/javascript">
     hljs.initHighlightingOnLoad();
+    hljs.initLineNumbersOnLoad();
  </script>
 
   </body>
