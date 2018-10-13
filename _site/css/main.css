@@ -6004,10 +6004,7 @@ a.text-dark:hover, a.text-dark:focus {
   border-collapse: collapse; }
 .mbtablestyle > table, .mbtablestyle td, .mbtablestyle th {
   border: 1px solid black;
-  padding-top: 2px;
-  padding-bottom: 2px;
-  padding-left: 2px;
-  padding-right: 2px; }
+  padding: 2px; }
 .mbtablestyle > table, .mbtablestyle th {
   padding-top: 2px;
   padding-bottom: 2px;
@@ -6089,6 +6086,25 @@ td.hljs-ln-code {
 
 .bs-callout-info h4 {
   color: #5bc0de; }
+
+#cheat-sheet .row {
+  font-family: "Source Code Pro";
+  font-size: 19px;
+  padding-top: 2px;
+  padding-bottom: 2px; }
+
+.dark {
+  background: #f4f4f4;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1); }
+
+.row-header {
+  color: #fff;
+  background-color: #292b2c;
+  text-align: center; }
+
+li.borderless {
+  border: 0 none; }
 
 #archive a {
   text-decoration: none;

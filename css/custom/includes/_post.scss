@@ -1,107 +1,142 @@
 #post {
-  h1, h2, h3, h4 {
+  h1,
+  h2,
+  h3,
+  h4 {
     color: $primary;
     padding-top: 10px;
   }
-
 }
 
 .mbtablestyle {
-        border-collapse: collapse;
+  border-collapse: collapse;
 
-   > table, td, th {
-        border: 1px solid black;
-        padding-top: 2px;
-        padding-bottom: 2px;
-        padding-left: 2px;
-        padding-right: 2px;
-        }
-  >  table, th {
+  > table,
+  td,
+  th {
+    border: 1px solid black;
+    padding: 2px;
+  }
+
+  > table,
+  th {
     padding-top: 2px;
     padding-bottom: 2px;
     text-align: center;
-    background-color:$primary;
+    background-color: $primary;
     color: white;
   }
-
 }
-
 /* for block of numbers */
 td.hljs-ln-numbers {
-    -webkit-touch-callout: none;
-    -webkit-user-select: none;
-    -khtml-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-
-    text-align: center;
-    color: #ccc;
-    border-right: 2px solid $primary;
-    vertical-align: top;
-    padding-right: 5px ! important;
-
-    /* your custom style here */
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  text-align: center;
+  color: #ccc;
+  border-right: 2px solid $primary;
+  vertical-align: top;
+  padding-right: 5px !important;
+  /* your custom style here */
 }
-
 /* for block of code */
 td.hljs-ln-code {
-    padding-left: 10px ! important;
+  padding-left: 10px !important;
 }
 
 .bs-callout {
-    padding: 20px;
-    margin: 20px 0;
-    border: 1px solid #eee;
-    border-left-width: 5px;
-    border-radius: 3px;
+  padding: 20px;
+  margin: 20px 0;
+  border: 1px solid #eee;
+  border-left-width: 5px;
+  border-radius: 3px;
 }
+
 .bs-callout h4 {
-    margin-top: 0;
-    margin-bottom: 5px;
+  margin-top: 0;
+  margin-bottom: 5px;
 }
+
 .bs-callout p:last-child {
-    margin-bottom: 0;
+  margin-bottom: 0;
 }
+
 .bs-callout code {
-    border-radius: 3px;
+  border-radius: 3px;
 }
+
 .bs-callout+.bs-callout {
-    margin-top: -5px;
+  margin-top: -5px;
 }
+
 .bs-callout-default {
-    border-left-color: #777;
+  border-left-color: #777;
 }
+
 .bs-callout-default h4 {
-    color: #777;
+  color: #777;
 }
+
 .bs-callout-primary {
-    border-left-color: #428bca;
+  border-left-color: #428bca;
 }
+
 .bs-callout-primary h4 {
-    color: #428bca;
+  color: #428bca;
 }
+
 .bs-callout-success {
-    border-left-color: #5cb85c;
+  border-left-color: #5cb85c;
 }
+
 .bs-callout-success h4 {
-    color: #5cb85c;
+  color: #5cb85c;
 }
+
 .bs-callout-danger {
-    border-left-color: #d9534f;
+  border-left-color: #d9534f;
 }
+
 .bs-callout-danger h4 {
-    color: #d9534f;
+  color: #d9534f;
 }
+
 .bs-callout-warning {
-    border-left-color: #f0ad4e;
+  border-left-color: #f0ad4e;
 }
+
 .bs-callout-warning h4 {
-    color: #f0ad4e;
+  color: #f0ad4e;
 }
+
 .bs-callout-info {
-    border-left-color: #5bc0de;
+  border-left-color: #5bc0de;
 }
+
 .bs-callout-info h4 {
-    color: #5bc0de;
+  color: #5bc0de;
 }
+
+#cheat-sheet .row {
+  font-family: "Source Code Pro";
+  font-size: 19px;
+  padding-top: 2px;
+  padding-bottom: 2px;
+}
+
+.dark {
+  background: #f4f4f4;
+  border-top: 1px solid rgba(0, 0, 0, .1);
+  border-bottom: 1px solid rgba(0, 0, 0, .1);
+}
+
+.row-header {
+  color: #fff;
+  background-color: #292b2c;
+  text-align: center;
+}
+
+li.borderless { border: 0 none; }

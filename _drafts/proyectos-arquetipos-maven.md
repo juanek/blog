@@ -19,6 +19,7 @@ Además, generaremos un arquetipo desde un proyecto existente.
   <li><a href="#id-section4" >4 - Compilar y construir proyectos.</a></li>
   <li><a href="#id-section5" >5 - Ejecutar programas.</a></li>
   <li><a href="#id-section6" >6 - Ejecutar pruebas.</a></li>
+  <li><a href="#id-section7" >7 - Resumen de comandos útiles.</a></li>
   <li><a href="#id-conclusiones" >Conclusiones.</a></li>
   <li><a href="#id-referencias" >Referencias.</a></li>
 </ul>
@@ -286,14 +287,16 @@ Cada uno de estos ciclos está constituído por fases, donde cada fase represent
 ![Ciclo de Maven](/img/ciclo-maven.svg)
 
 Por ejemplo, el ciclo de vida **Default** comprende las siguientes fases
+<ul class="list-unstyled">
+  <li><b>validate</b> - valida que el proyecto esté correcto y toda lainformación necesaria este disponible</li>
+  <li><b>compile</b> - compila el código fuente del proyecto</li>
+  <li><b>test</b> - se corren las pruebas unitarias usando el framework de testing. Estas pruebas no requieren que el código fuente esté empaquetado o desplegado.</li>
+  <li><b>package</b> - toma el código compilado y lo empaqueta en algun formato distribuible como como un archivo JAR.</li>
+  <li><b>verify</b> - se verifican los resultados de las pruebas de integración</li>
+  <li><b>install</b> - se intala el paquete en el repositorio local, para usar como dependencias de otros proyectos localmente</li>
+  <li><b>deploy</b> - copia el empaquetado final al repositorio remoto para ser comprtido por otros desarroladores y proyectos.</li>
+</ul>
 
-validate - validate the project is correct and all necessary information is available
-compile - compile the source code of the project
-test - test the compiled source code using a suitable unit testing framework. These tests should not require the code be packaged or deployed
-package - take the compiled code and package it in its distributable format, such as a JAR.
-verify - run any checks on results of integration tests to ensure quality criteria are met
-install - install the package into the local repository, for use as a dependency in other projects locally
-deploy - done in the build environment, copies the final package to the remote repository for sharing with other developers and projects.
 Estas fases (además de otras que no se muestran en este listado) son ejecutadas secuencialmente para completar el ciclo de vida **Default**.
 
 Para empaquetar el proyecto e instalarlo en el repositorio local se puede usar
@@ -318,8 +321,8 @@ Hello World!
 
 <div id='id-section6'/>
 ## 6 - Ejecutar pruebas con Maven.
-{% highlight console %}
 En la fase de test puedes invocar una prueba en particular con
+{% highlight console %}
 $ mvn -Dtest=ar.com.jekipes.AppTest test
 ...
 -------------------------------------------------------
@@ -330,10 +333,55 @@ Running ar.com.jekipes.AppTest
 Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.521 sec - in ar.com.jekipes.AppTest
 {% endhighlight %}
 
+<div id='id-section7'/>
+## 7 - Resumen de comandos útiles.
+<br />
+<div class="container" id="cheat-sheet">
+    <div class="row row-header">
+      <div class="col-sm-12"><b>Resumen de comandos Maven</b></div>
+    </div>
+    <div class="row dark">
+      <div class="col-sm-6"><b>Crear un proyecto</b></div>
+      <div class="col-sm-6">mvn archetype:generate</div>
+    </div>
+    <div class="row">
+      <div class="col-sm-6"><b>Crear arquetipo desde un proyecto</b></div>
+      <div class="col-sm-6">mvn archetype:create-from-project</div>
+    </div>
+    <div class="row dark">
+      <div class="col-sm-6"><b>Limpiar el proyecto</b></div>
+      <div class="col-sm-6">mvn clean</div>
+    </div>
+    <div class="row">
+      <div class="col-sm-6"><b>Limpiar y compilar</b></div>
+      <div class="col-sm-6">mvn clean compile</div>
+    </div>
+    <div class="row dark">
+      <div class="col-sm-6"><b>Limpiar, compilar y empaquetar</b></div>
+      <div class="col-sm-6">mvn clean package</div>
+    </div>
+    <div class="row">
+      <div class="col-sm-6"><b>Instalar en el repositorio local</b></div>
+      <div class="col-sm-6">mvn install</div>
+    </div>
+    <div class="row dark">
+      <div class="col-sm-6"><b>Instalar en el repositorio remoto</b></div>
+      <div class="col-sm-6">mvn deploy</div>
+    </div>
+    <div class="row">
+      <div class="col-sm-6"><b>Ejecutar la prueba AppTest</b></div>
+      <div class="col-sm-6">mvn -Dtest=org.myapp.AppTest test</div>
+    </div>
+    <div class="row dark">
+      <div class="col-sm-6"><b>Ejecutar un aplicación</b></div>
+      <div class="col-sm-6">java -cp target/myapp-1.0-SNAPSHOT.jar org.myapp.App</div>
+    </div>
+  </div>
+<br />
 <div id='id-conclusiones'/>
 ## Conclusiones.
 En esta guía hemos visto las principales características de Apache Maven y como usarlas desde la linea de comandos para generar arquetipos y proyectos.
-El código fuente utilizado para este ejemplo lo puedes encontrar en [Repositorio GitHub](https://github.com/juanek)
+El código fuente utilizado para este ejemplo lo puedes encontrar en [Repositorio GitHub](https://github.com/juanek/logback-quickstart)
 
 <div id='id-referencias'/>
 ## Referencias.

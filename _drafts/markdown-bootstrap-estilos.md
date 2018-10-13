@@ -150,3 +150,23 @@ public abstract class L2Char extends L2Object {
 
 <div id='id-referencias'/>
 ## Referencias.
+
+
+
+<div class="container" id="cheat-sheet">
+    <div class="row row-header">
+      <div class="col-sm-12"><b>Cheat Sheet Git</b></div>
+    </div>
+    <div class="row dark">
+      <div class="col-sm-6"><b>Configure Git username</b></div>
+      <div class="col-sm-6">git config --global user.name "Your Name"</div>
+    </div>
+    <div class="row">
+      <div class="col-sm-6">Configure Git email</div>
+      <div class="col-sm-6">git config --global user.email "yournamey@domain.com.ar"</div>
+    </div>
+    <div class="row dark">
+      <div class="col-sm-6">Create Repository</div>
+      <div class="col-sm-6">git init example</div>
+    </div>
+  </div>

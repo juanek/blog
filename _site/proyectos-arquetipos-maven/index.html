@@ -7,7 +7,14 @@
   <title>Juan E. Kipes Blog</title>
 
   <link rel="stylesheet" href="/css/main.css">
+  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:400,600" rel="stylesheet" type="text/css">
+   
+    
 
+
+
+
+ 
 </head>
 
   <body>
@@ -52,6 +59,16 @@
     <div class="col">
       <p class="lead text-info">
         Sep 26, 2018
+        <span>&nbsp</span>
+        <span>
+        
+          
+          <a href="/tag/java"><code class="highligher-rouge"><nobr>#java</nobr></code></a>
+        
+          
+          <a href="/tag/maven"><code class="highligher-rouge"><nobr>#maven</nobr></code></a>
+        
+      </span>
       </p>
       <h1>Cómo crear proyectos y arquetipos con Maven.</h1>
       <article>
@@ -67,6 +84,7 @@ Además, generaremos un arquetipo desde un proyecto existente.</p>
   <li><a href="#id-section4">4 - Compilar y construir proyectos.</a></li>
   <li><a href="#id-section5">5 - Ejecutar programas.</a></li>
   <li><a href="#id-section6">6 - Ejecutar pruebas.</a></li>
+  <li><a href="#id-section7">7 - Resumen de comandos útiles.</a></li>
   <li><a href="#id-conclusiones">Conclusiones.</a></li>
   <li><a href="#id-referencias">Referencias.</a></li>
 </ul>
@@ -323,15 +341,17 @@ Observa los parámetros que identifican el arquetipo.
 <p><img src="/img/ciclo-maven.svg" alt="Ciclo de Maven" /></p>
 
 <p>Por ejemplo, el ciclo de vida <strong>Default</strong> comprende las siguientes fases</p>
+<ul class="list-unstyled">
+  <li><b>validate</b> - valida que el proyecto esté correcto y toda lainformación necesaria este disponible</li>
+  <li><b>compile</b> - compila el código fuente del proyecto</li>
+  <li><b>test</b> - se corren las pruebas unitarias usando el framework de testing. Estas pruebas no requieren que el código fuente esté empaquetado o desplegado.</li>
+  <li><b>package</b> - toma el código compilado y lo empaqueta en algun formato distribuible como como un archivo JAR.</li>
+  <li><b>verify</b> - se verifican los resultados de las pruebas de integración</li>
+  <li><b>install</b> - se intala el paquete en el repositorio local, para usar como dependencias de otros proyectos localmente</li>
+  <li><b>deploy</b> - copia el empaquetado final al repositorio remoto para ser comprtido por otros desarroladores y proyectos.</li>
+</ul>
 
-<p>validate - validate the project is correct and all necessary information is available
-compile - compile the source code of the project
-test - test the compiled source code using a suitable unit testing framework. These tests should not require the code be packaged or deployed
-package - take the compiled code and package it in its distributable format, such as a JAR.
-verify - run any checks on results of integration tests to ensure quality criteria are met
-install - install the package into the local repository, for use as a dependency in other projects locally
-deploy - done in the build environment, copies the final package to the remote repository for sharing with other developers and projects.
-Estas fases (además de otras que no se muestran en este listado) son ejecutadas secuencialmente para completar el ciclo de vida <strong>Default</strong>.</p>
+<p>Estas fases (además de otras que no se muestran en este listado) son ejecutadas secuencialmente para completar el ciclo de vida <strong>Default</strong>.</p>
 
 <p>Para empaquetar el proyecto e instalarlo en el repositorio local se puede usar</p>
 
@@ -354,9 +374,9 @@ Estas fases (además de otras que no se muestran en este listado) son ejecutadas
 <div id="id-section6" />
 
 <h2 id="6---ejecutar-pruebas-con-maven">6 - Ejecutar pruebas con Maven.</h2>
+<p>En la fase de test puedes invocar una prueba en particular con</p>
 
-<figure class="highlight"><pre><code class="language-console" data-lang="console"><span class="go">En la fase de test puedes invocar una prueba en particular con
-</span><span class="gp">$</span> mvn <span class="nt">-Dtest</span><span class="o">=</span>ar.com.jekipes.AppTest <span class="nb">test</span>
+<figure class="highlight"><pre><code class="language-console" data-lang="console"><span class="gp">$</span> mvn <span class="nt">-Dtest</span><span class="o">=</span>ar.com.jekipes.AppTest <span class="nb">test</span>
 <span class="c">...
 </span><span class="go">-------------------------------------------------------
  T E S T S
@@ -365,11 +385,57 @@ Running ar.com.jekipes.AppTest
 22:15:57.555 [main] INFO  AppTest - hello test!!!
 Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.521 sec - in ar.com.jekipes.AppTest</span></code></pre></figure>
 
+<div id="id-section7" />
+
+<h2 id="7---resumen-de-comandos-útiles">7 - Resumen de comandos útiles.</h2>
+<p><br /></p>
+<div class="container" id="cheat-sheet">
+    <div class="row row-header">
+      <div class="col-sm-12"><b>Resumen de comandos Maven</b></div>
+    </div>
+    <div class="row dark">
+      <div class="col-sm-6"><b>Crear un proyecto</b></div>
+      <div class="col-sm-6">mvn archetype:generate</div>
+    </div>
+    <div class="row">
+      <div class="col-sm-6"><b>Crear arquetipo desde un proyecto</b></div>
+      <div class="col-sm-6">mvn archetype:create-from-project</div>
+    </div>
+    <div class="row dark">
+      <div class="col-sm-6"><b>Limpiar el proyecto</b></div>
+      <div class="col-sm-6">mvn clean</div>
+    </div>
+    <div class="row">
+      <div class="col-sm-6"><b>Limpiar y compilar</b></div>
+      <div class="col-sm-6">mvn clean compile</div>
+    </div>
+    <div class="row dark">
+      <div class="col-sm-6"><b>Limpiar, compilar y empaquetar</b></div>
+      <div class="col-sm-6">mvn clean package</div>
+    </div>
+    <div class="row">
+      <div class="col-sm-6"><b>Instalar en el repositorio local</b></div>
+      <div class="col-sm-6">mvn install</div>
+    </div>
+    <div class="row dark">
+      <div class="col-sm-6"><b>Instalar en el repositorio remoto</b></div>
+      <div class="col-sm-6">mvn deploy</div>
+    </div>
+    <div class="row">
+      <div class="col-sm-6"><b>Ejecutar la prueba AppTest</b></div>
+      <div class="col-sm-6">mvn -Dtest=org.myapp.AppTest test</div>
+    </div>
+    <div class="row dark">
+      <div class="col-sm-6"><b>Ejecutar un aplicación</b></div>
+      <div class="col-sm-6">java -cp target/myapp-1.0-SNAPSHOT.jar org.myapp.App</div>
+    </div>
+  </div>
+<p><br /></p>
 <div id="id-conclusiones" />
 
 <h2 id="conclusiones">Conclusiones.</h2>
 <p>En esta guía hemos visto las principales características de Apache Maven y como usarlas desde la linea de comandos para generar arquetipos y proyectos.
-El código fuente utilizado para este ejemplo lo puedes encontrar en <a href="https://github.com/juanek">Repositorio GitHub</a></p>
+El código fuente utilizado para este ejemplo lo puedes encontrar en <a href="https://github.com/juanek/logback-quickstart">Repositorio GitHub</a></p>
 
 <div id="id-referencias" />
 
@@ -429,7 +495,10 @@ El código fuente utilizado para este ejemplo lo puedes encontrar en <a href="ht
  <script src="//cdnjs.cloudflare.com/ajax/libs/highlightjs-line-numbers.js/2.4.0/highlightjs-line-numbers.min.js"></script>
   <script type="text/javascript">
     hljs.initHighlightingOnLoad();
-    hljs.initLineNumbersOnLoad();
+    //hljs.initLineNumbersOnLoad();
+    hljs.initLineNumbersOnLoad({
+    singleLine: true
+});
  </script>
 
   </body>

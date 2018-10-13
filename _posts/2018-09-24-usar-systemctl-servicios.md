@@ -3,7 +3,6 @@
   title: "Usar systemctl para administrar servicios en Linux"
   date:   2018-09-24 17:03:00 -0300
   tags: linux
-  description: "Systemctl es usado por la principales distribuciones linux para administrar servicios."
   summary: "Systemctl es usado por la principales distribuciones linux para administrar servicios."
 ---
 

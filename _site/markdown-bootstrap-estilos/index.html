@@ -7,7 +7,14 @@
   <title>Juan E. Kipes Blog</title>
 
   <link rel="stylesheet" href="/css/main.css">
+  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:400,600" rel="stylesheet" type="text/css">
+   
+    
 
+
+
+
+ 
 </head>
 
   <body>
@@ -52,6 +59,16 @@
     <div class="col">
       <p class="lead text-info">
         Sep 26, 2018
+        <span>&nbsp</span>
+        <span>
+        
+          
+          <a href="/tag/java"><code class="highligher-rouge"><nobr>#java</nobr></code></a>
+        
+          
+          <a href="/tag/maven"><code class="highligher-rouge"><nobr>#maven</nobr></code></a>
+        
+      </span>
       </p>
       <h1>Ejemplos de estilos markdown y boostrap para los post.</h1>
       <article>
@@ -198,6 +215,24 @@ All
 
 <h2 id="referencias">Referencias.</h2>
 
+<div class="container" id="cheat-sheet">
+    <div class="row row-header">
+      <div class="col-sm-12"><b>Cheat Sheet Git</b></div>
+    </div>
+    <div class="row dark">
+      <div class="col-sm-6"><b>Configure Git username</b></div>
+      <div class="col-sm-6">git config --global user.name "Your Name"</div>
+    </div>
+    <div class="row">
+      <div class="col-sm-6">Configure Git email</div>
+      <div class="col-sm-6">git config --global user.email "yournamey@domain.com.ar"</div>
+    </div>
+    <div class="row dark">
+      <div class="col-sm-6">Create Repository</div>
+      <div class="col-sm-6">git init example</div>
+    </div>
+  </div>
+
       </article>
     </div>
   </div>
@@ -245,7 +280,10 @@ All
  <script src="//cdnjs.cloudflare.com/ajax/libs/highlightjs-line-numbers.js/2.4.0/highlightjs-line-numbers.min.js"></script>
   <script type="text/javascript">
     hljs.initHighlightingOnLoad();
-    hljs.initLineNumbersOnLoad();
+    //hljs.initLineNumbersOnLoad();
+    hljs.initLineNumbersOnLoad({
+    singleLine: true
+});
  </script>
 
   </body>

@@ -7,7 +7,7 @@
 ---
 
 
-Para ontener información del uso del disco de archivos y directorios de sistemas UNIX/LINUX podemos usar el comando **du (Disk Usage)** .
+Para obtener información del uso del disco de archivos y directorios de sistemas UNIX/LINUX podemos usar el comando **du (Disk Usage)** .
 
 Estos son algunos de los comandos **du** con combinación de opciones que nos ayudarán a encontrar esta información.
 
