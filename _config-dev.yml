@@ -6,7 +6,7 @@ description:
 url:
 
 environment: development
-show_drafts: true
+show_drafts: false
 
 # Social icons
 show_social_icons: true

@@ -1,7 +1,7 @@
 ---
   layout: post
   title: "Cómo crear proyectos y arquetipos con Maven."
-  date:   2018-09-26 17:03:00 -0300
+  date:   2018-09-26 14:03:00 -0300
   tags: java maven
   summary: "Maven es una herramienta para crear proyectos Java y template de proyectos Java."
 ---
