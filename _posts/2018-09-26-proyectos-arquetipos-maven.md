@@ -313,11 +313,35 @@ $ mvn clean package
 
 <div id='id-section5'/>
 ## 5 - Ejecutar programas con Maven.
-Puedes el proyecto compilado y empaquetado anteriormente con
+Puedes ejecutar el proyecto compilado y empaquetado anteriormente usando directamente el comando **java**
 {% highlight console %}
 $ java -cp target/logback-quickstart-1.0-SNAPSHOT.jar ar.com.jekipes.App
 Hello World!
 {% endhighlight %}
+
+O puedes usar un plugin Maven que te permite ejecutar el método main de alguna clase Java de tu proyecto, incluyendo en el classpath automáticamente todas las dependencias.
+
+Agregamos al final de nuestro **pom.xml** el plugin **exec-maven-plugin**
+{% highlight xml %}
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>1.6.0</version>
+            </plugin>
+        </plugins>
+    </build>
+{% endhighlight %}
+
+Y ejecutamos la clase Java con
+
+{% highlight console %}
+$ mvn exec:java -Dexec.mainClass="ar.com.jekipes.App"
+Hello World!
+{% endhighlight %}
+
+Considera revisar la documentación de este plugin para un uso más avanzado [exec-maven-plugin](http://www.mojohaus.org/exec-maven-plugin/index.html).
 
 <div id='id-section6'/>
 ## 6 - Ejecutar pruebas con Maven.
@@ -376,12 +400,16 @@ Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.521 sec - in a
       <div class="col-sm-6"><b>Ejecutar un aplicación</b></div>
       <div class="col-sm-6">java -cp target/myapp-1.0-SNAPSHOT.jar org.myapp.App</div>
     </div>
+    <div class="row">
+      <div class="col-sm-6"><b>Ejecutar una aplicación usando Maven</b></div>
+      <div class="col-sm-6">mvn exec:java -Dexec.mainClass="org.myapp.App"</div>
+    </div>
   </div>
 <br />
 <div id='id-conclusiones'/>
 ## Conclusiones.
 En esta guía hemos visto las principales características de Apache Maven y como usarlas desde la linea de comandos para generar arquetipos y proyectos.
-El código fuente utilizado para este ejemplo lo puedes encontrar en [Repositorio GitHub](https://github.com/juanek/logback-quickstart)
+El código fuente utilizado para este ejemplo lo puedes encontrar en el [Repositorio GitHub](https://github.com/juanek/logback-quickstart)
 
 <div id='id-referencias'/>
 ## Referencias.
@@ -395,3 +423,5 @@ El código fuente utilizado para este ejemplo lo puedes encontrar en [Repositori
 
 
 [http://maven.apache.org/guides/introduction/introduction-to-the-lifecycle.html](http://maven.apache.org/guides/introduction/introduction-to-the-lifecycle.html)
+
+[http://www.mojohaus.org/exec-maven-plugin](http://www.mojohaus.org/exec-maven-plugin/index.html).

@@ -14,5 +14,15 @@ Actualmente trabajo como desarrollador Freelancer de aplicaciones web relacionad
 
 Autodidacta, minimalista y fan del software libre.
 
+
+<div class="bs-callout bs-callout-default">
+<i>Es difícil, si no imposible, aprender un tema tan sólo leyéndolo, sin aplicar la información a problemas específicos que te estimulen en pensar en lo  que has leído. Además, se aprenden mejor las cosas que uno descubre por sí mismo.</i>
+<br />
+<br />
+—DONALD KNUTH, The Art of Computer Programming
+</div>
+
+
+
 ### Para contactarme
 Email: <juanekipes@gmail.com>

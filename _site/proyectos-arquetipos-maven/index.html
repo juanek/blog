@@ -6,8 +6,10 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Juan E. Kipes Blog</title>
 
-  <link rel="stylesheet" href="/css/main.css">
+
   <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:400,600" rel="stylesheet" type="text/css">
+  <!--<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600' rel='stylesheet' type='text/css'>-->
+<link rel="stylesheet" href="/css/main.css">
    
     
 
@@ -70,7 +72,7 @@
         
       </span>
       </p>
-      <h1>Cómo crear proyectos y arquetipos con Maven.</h1>
+      <h1><b><i>Cómo crear proyectos y arquetipos con Maven.</i></b></h1>
       <article>
         <p>En esta guía vamos a crear proyectos Java con Maven directamente desde la consola de comandos de manera interactiva y no-interactiva.
 Además, generaremos un arquetipo desde un proyecto existente.</p>
@@ -366,10 +368,31 @@ Observa los parámetros que identifican el arquetipo.
 <div id="id-section5" />
 
 <h2 id="5---ejecutar-programas-con-maven">5 - Ejecutar programas con Maven.</h2>
-<p>Puedes el proyecto compilado y empaquetado anteriormente con</p>
+<p>Puedes ejecutar el proyecto compilado y empaquetado anteriormente usando directamente el comando <strong>java</strong></p>
 
 <figure class="highlight"><pre><code class="language-console" data-lang="console"><span class="gp">$</span> java <span class="nt">-cp</span> target/logback-quickstart-1.0-SNAPSHOT.jar ar.com.jekipes.App
 <span class="go">Hello World!</span></code></pre></figure>
+
+<p>O puedes usar un plugin Maven que te permite ejecutar el método main de alguna clase Java de tu proyecto, incluyendo en el classpath automáticamente todas las dependencias.</p>
+
+<p>Agregamos al final de nuestro <strong>pom.xml</strong> el plugin <strong>exec-maven-plugin</strong></p>
+
+<figure class="highlight"><pre><code class="language-xml" data-lang="xml">    <span class="nt">&lt;build&gt;</span>
+        <span class="nt">&lt;plugins&gt;</span>
+            <span class="nt">&lt;plugin&gt;</span>
+                <span class="nt">&lt;groupId&gt;</span>org.codehaus.mojo<span class="nt">&lt;/groupId&gt;</span>
+                <span class="nt">&lt;artifactId&gt;</span>exec-maven-plugin<span class="nt">&lt;/artifactId&gt;</span>
+                <span class="nt">&lt;version&gt;</span>1.6.0<span class="nt">&lt;/version&gt;</span>
+            <span class="nt">&lt;/plugin&gt;</span>
+        <span class="nt">&lt;/plugins&gt;</span>
+    <span class="nt">&lt;/build&gt;</span></code></pre></figure>
+
+<p>Y ejecutamos la clase Java con</p>
+
+<figure class="highlight"><pre><code class="language-console" data-lang="console"><span class="gp">$</span> mvn <span class="nb">exec</span>:java <span class="nt">-Dexec</span>.mainClass<span class="o">=</span><span class="s2">"ar.com.jekipes.App"</span>
+<span class="go">Hello World!</span></code></pre></figure>
+
+<p>Considera revisar la documentación de este plugin para un uso más avanzado <a href="http://www.mojohaus.org/exec-maven-plugin/index.html">exec-maven-plugin</a>.</p>
 
 <div id="id-section6" />
 
@@ -429,13 +452,17 @@ Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.521 sec - in a
       <div class="col-sm-6"><b>Ejecutar un aplicación</b></div>
       <div class="col-sm-6">java -cp target/myapp-1.0-SNAPSHOT.jar org.myapp.App</div>
     </div>
+    <div class="row">
+      <div class="col-sm-6"><b>Ejecutar una aplicación usando Maven</b></div>
+      <div class="col-sm-6">mvn exec:java -Dexec.mainClass="org.myapp.App"</div>
+    </div>
   </div>
 <p><br /></p>
 <div id="id-conclusiones" />
 
 <h2 id="conclusiones">Conclusiones.</h2>
 <p>En esta guía hemos visto las principales características de Apache Maven y como usarlas desde la linea de comandos para generar arquetipos y proyectos.
-El código fuente utilizado para este ejemplo lo puedes encontrar en <a href="https://github.com/juanek/logback-quickstart">Repositorio GitHub</a></p>
+El código fuente utilizado para este ejemplo lo puedes encontrar en el <a href="https://github.com/juanek/logback-quickstart">Repositorio GitHub</a></p>
 
 <div id="id-referencias" />
 
@@ -447,6 +474,8 @@ El código fuente utilizado para este ejemplo lo puedes encontrar en <a href="ht
 <p><a href="https://docs.oracle.com/javase/specs/jls/se6/html/packages.html#7.7">https://docs.oracle.com/javase/specs/jls/se6/html/packages.html#7.7</a></p>
 
 <p><a href="http://maven.apache.org/guides/introduction/introduction-to-the-lifecycle.html">http://maven.apache.org/guides/introduction/introduction-to-the-lifecycle.html</a></p>
+
+<p><a href="http://www.mojohaus.org/exec-maven-plugin/index.html">http://www.mojohaus.org/exec-maven-plugin</a>.</p>
 
       </article>
     </div>
