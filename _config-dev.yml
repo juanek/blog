@@ -11,7 +11,7 @@ show_drafts: true
 # Social icons
 show_social_icons: true
 github_username: juanek
-pinterest_username: jkipes
+#pinterest_username: jkipes
 
 markdown: kramdown
 kramdown:

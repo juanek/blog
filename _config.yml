@@ -6,12 +6,12 @@ description:
 url:
 
 environment: production
-show_drafts: false  
+show_drafts: false
 
 # Social icons
 show_social_icons: true
 github_username: juanek
-pinterest_username: jkipes
+#pinterest_username: jkipes
 #twitter_username: juanek
 
 disqus:
