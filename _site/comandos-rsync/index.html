@@ -60,33 +60,63 @@
   <div class="row">
     <div class="col">
       <p class="lead text-info">
+        Nov 26, 2018
+        <span>&nbsp</span>
+        <span>
         
+          
+          <a href="/tag/linux"><code class="highligher-rouge"><nobr>#linux</nobr></code></a>
+        
+      </span>
       </p>
-      <h1>Acerca de mí</h1>
+      <h1><b><i>10 comandos rsync más utilizados en Linux.</i></b></h1>
       <article>
-        <p><img src="/img/juanek.jpg" alt="Juan E. Kipes" style="width: 30%;  margin: 0 10px 0 0;" /></p>
-
-<p>Me llamo Juan Edgardo Kipes, vivo en Santa Fe, Argentina. Soy Ingeniero en Sistemas de Información de la UTN-FRSF.</p>
-
-<p>El desarrollo de software es mi pasión y mi profesión.</p>
-
-<p>Actualmente trabajo como desarrollador Freelancer de aplicaciones web relacionadas al mundo Java.</p>
-
-<p>Autodidacta, minimalista y fan del software libre.</p>
-
-<div class="bs-callout bs-callout-default">
-<i>Es difícil, si no imposible, aprender un tema tan sólo leyéndolo, sin aplicar la información a problemas específicos que te estimulen en pensar en lo  que has leído. Además, se aprenden mejor las cosas que uno descubre por sí mismo.</i>
-<br />
-<br />
-—DONALD KNUTH, The Art of Computer Programming
+        <div class="bs-callout bs-callout-success">
+<h3>Contenido</h3>
+<ul class="list-unstyled">
+  <li><a href="#id-section1">¿Que es Rsync?</a></li>
+  <li><a href="#id-section2">Como funciona</a></li>
+  <li><a href="#id-section3">1- Bla bla</a></li>
+  <li><a href="#id-conclusiones">Conclusiones.</a></li>
+  <li><a href="#id-referencias">Referencias.</a></li>
+</ul>
 </div>
 
-<h3 id="para-contactarme">Para contactarme</h3>
-<p>Email: <a href="mailto:juanekipes@gmail.com">juanekipes@gmail.com</a></p>
+<div id="id-section1" />
+
+<h2 id="que-es-rsync">¿Que es Rsync?.</h2>
+<p>Rsync es un programa que puede ser usado para sincronizar archivos y directorios en ubicaciones tanto locales como remotas. Trabaja a traves de SSH, permite hacer backups incrementales, ejecutar comandos en una máquina remota y reemplaza la necesidad de usar los comandos cp y scp.</p>
+
+<div id="id-section2" />
+
+<h2 id="como-funciona">Como funciona.</h2>
+
+<p>La sintaxis básica de rsync es muy sencilla, y opera en una forma que es similar a ssh, scp y cp.</p>
+
+<p>rsync opciones fuente destino</p>
+
+<p>Las principales opciones</p>
+
+<p>-v : verbose o modo debug
+-r : copia datos recursivamente (pero no preserva timestamps y permisos mientras se transfieren datos)
+-a : modo archive, permite copiar archivos recursivamente y esto también preserva enláces simbólicas, permisos, usuarios, grupos y timestamps.
+-z : comprimir archivos
+-h : salida en formato compreensible
+-d : tranfiere directorios sin recursión
+-e : especifica ssh como shell remoto.</p>
+
+<div id="id-conclusiones" />
+
+<h2 id="conclusiones">Conclusiones.</h2>
+
+<div id="id-referencias" />
+
+<h2 id="referencias">Referencias.</h2>
 
       </article>
     </div>
   </div>
+  
 </div>
 
     <footer class="py-5">

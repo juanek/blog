@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Juan E. Kipes Blog</title>
+
+
+  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:400,600" rel="stylesheet" type="text/css">
+  <!--<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600' rel='stylesheet' type='text/css'>-->
+<link rel="stylesheet" href="/css/main.css">
+   
+    
+
+
+
+
+ 
+</head>
+
+  <body>
+    <!-- NAV -->
+<nav class="navbar navbar-expand-md navbar-light py-4">
+  <div class="container">
+    <a href="/" class="navbar-brand">
+      <h2 class="d-inline align-middle pl-3 text-primary">Juan E. Kipes</h2>
+    </a>
+    <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a href="/archivos/" class="nav-link">Archivos</a>
+        </li>
+        <li class="nav-item">
+          <a href="/acerca/" class="nav-link">Sobre Mí</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <section id="banner" class="py-5 d-none d-sm-block">
+  <div class="primary-overlay text-white">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12 text-center">
+          <!--<h1 class="display-5 pt-1">
+	      ...un blog para compartir código...
+      </h1>-->
+      </div>
+<!--      <div class="col-md-2"></div>-->
+    </div>
+  </div>
+</section>
+
+    <div id="post" class="container pt-3">
+  <div class="row">
+    <div class="col">
+      <p class="lead text-info">
+        Jan 19, 2019
+        <span>&nbsp</span>
+        <span>
+        
+          
+          <a href="/tag/java"><code class="highligher-rouge"><nobr>#java</nobr></code></a>
+        
+      </span>
+      </p>
+      <h1><b><i>Cómo usar los Java Enum.</i></b></h1>
+      <article>
+        <div class="bs-callout bs-callout-success">
+<h3>Contenido</h3>
+<ul class="list-unstyled">
+  <li><a href="#id-section1">Introducción</a></li>
+  <li><a href="#id-section2">¿Qué son los Java enums?</a></li>
+  <li><a href="#id-section3">Los enum en lugar de constantes int</a></li>
+  <li><a href="#id-section4">Los enum como Singleton.</a></li>
+  <li><a href="#id-section5">Reemplazar los if anidados por enum.</a></li>
+  <li><a href="#id-section6">Usar interfaces para extender enum.</a></li>
+  <li><a href="#id-conclusiones">Conclusiones.</a></li>
+  <li><a href="#id-referencias">Referencias.</a></li>
+</ul>
+</div>
+
+<div id="id-section1" />
+
+<h2 id="introducción">Introducción.</h2>
+<p>Los Enums son una parte muy porderosa e importante del lenguaje Java. Aunque son muy útiles no siempre son usados correctamente.</p>
+
+<p>En este post veremos como usarlos y en que casos son útiles.</p>
+
+<div id="id-section2" />
+
+<h2 id="qué-son-los-java-enums">¿Qué son los Java enums?.</h2>
+<p>Un tipo enumerado en Java es un tipo cuyos valores consisten de conjunto fijo de constantes.En Java, los enumerados son tipos de clases que tienen un conjunto predefinido de instancias. Pueden tener constructores, métodos, campos … Son como clases, con algunas pocas diferencias específicas:</p>
+
+<ul>
+  <li>Extienden de java.lang.Enum</li>
+  <li>Tienen un conjunto fijo de instancias.</li>
+  <li>Pueden ser usadas en sentencias</li>
+  <li>No puedes ser extendidas</li>
+</ul>
+
+<p>Los Enums son similares a las clases por lo tanto pueden ser usadas para muchas mas cosas que solo representar enumeraciones.</p>
+
+<div id="id-section3" />
+
+<h2 id="los-enum-en-lugar-de-constantes-int">Los Enum en lugar de constantes int.</h2>
+
+<p>Un tipo enumerado es un tipo que consiste de un conjunto fijo de constantes, como estaciones del año, los planetas del sistema solar o los palos de un mazo de naipes.</p>
+
+<p>Una forma comun de representar enumerados es usar el int enum pattern</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="c1">// El int enum pattern - tiene muchas deficiencias!</span>
+<span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">int</span> <span class="n">APPLE_FUJI</span>           <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+<span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">int</span> <span class="n">APPLE_PIPPIN</span>         <span class="o">=</span> <span class="mi">1</span><span class="o">;</span>
+<span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">int</span> <span class="n">APPLE_GRANNY_SMITH</span>   <span class="o">=</span> <span class="mi">2</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">int</span> <span class="n">ORANGE_NAVEL</span>         <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+<span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">int</span> <span class="n">ORANGE_TEMPLE</span>        <span class="o">=</span> <span class="mi">1</span><span class="o">;</span>
+<span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">int</span> <span class="n">ORANGE_BLOOD</span>         <span class="o">=</span> <span class="mi">2</span><span class="o">;</span></code></pre></figure>
+
+<p>Una forma más elegante elegante y segura es usar enum.</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">enum</span> <span class="n">Apple</span> <span class="o">{</span> <span class="n">FUJI</span><span class="o">,</span> <span class="n">PIPPIN</span><span class="o">,</span> <span class="n">GRANNY_SMITH</span> <span class="o">}</span>
+<span class="kd">public</span> <span class="kd">enum</span> <span class="n">Orange</span> <span class="o">{</span> <span class="n">NAVEL</span><span class="o">,</span> <span class="n">TEMPLE</span><span class="o">,</span> <span class="n">BLOOD</span> <span class="o">}</span></code></pre></figure>
+
+<div id="id-section4" />
+
+<h2 id="los-enum-como-singleton">Los enum como Singleton.</h2>
+
+<p>Usando enum en Java es fácil implementar el patrón Singleton:</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">enum</span> <span class="n">Singleton</span> <span class="o">{</span>
+    <span class="n">INSTANCE</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="nf">Singleton</span><span class="o">()</span> <span class="o">{</span>
+        <span class="c1">//Es llamado la primera vez cuando el enum es inicializado</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"I am initialised"</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span></code></pre></figure>
+
+<p>Como puedes ver, provee una simple y correcta implementación del patron Singleton.Además, como es un enum, este no tiene que ser una sola instancia, podrían ser dos …</p>
+
+<div id="id-section5" />
+
+<h2 id="reemplazar-los-if-anidados-por-enum">Reemplazar los if anidados por enum.</h2>
+
+<p>Para mostrar un ejemplo, vamos a modelar el juego Piedra-Papel-Tijera para ello usamos un enumerado que representa las tres señas posibles.</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">enum</span> <span class="n">HandSign</span> <span class="o">{</span>  <span class="n">SCISSOR</span><span class="o">,</span> <span class="n">PAPER</span><span class="o">,</span> <span class="n">ROCK</span>  <span class="o">}</span></code></pre></figure>
+
+<p>Queremos obtener una seña aleatorio para la máquina y mostrar un mensaje en consola. Una posible implementación sería:</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="c1">//generar un enum aleatorio</span>
+<span class="n">computerMove</span> <span class="o">=</span> <span class="n">HandSign</span><span class="o">.</span><span class="na">values</span><span class="o">()[</span><span class="k">new</span> <span class="n">Random</span><span class="o">().</span><span class="na">nextInt</span><span class="o">(</span><span class="n">HandSign</span><span class="o">.</span><span class="na">values</span><span class="o">().</span><span class="na">length</span><span class="o">)];</span>
+<span class="c1">//mostar mensaje informando la opción generada</span>
+<span class="k">if</span> <span class="o">(</span><span class="n">computerMove</span> <span class="o">==</span> <span class="n">HandSign</span><span class="o">.</span><span class="na">SCISSOR</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"   Mi turno: Tijera"</span><span class="o">);</span>
+<span class="o">}</span> <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">computerMove</span> <span class="o">==</span> <span class="n">HandSign</span><span class="o">.</span><span class="na">PAPER</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"   Mi turno: Papel"</span><span class="o">);</span>
+<span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"   Mi turno: Piedra"</span><span class="o">);</span>
+<span class="o">}</span></code></pre></figure>
+
+<p>Este caso es muy sencillo, unos pocos estados y con un comportamiento asociado muy sencillo, mostrar un mensaje.</p>
+
+<p>También se podría haber usado la sentencia switch, pero una forma mas elegante es representarlo usando enum.</p>
+
+<p>El enum ahora además de representar un conjunto fijo de constantes tiene una lógica asociada a cada constante mediante el método abstracto show().</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">enum</span> <span class="n">HandSign</span> <span class="o">{</span>
+    <span class="n">SCISSOR</span> <span class="o">{</span>
+        <span class="nd">@Override</span>
+        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">show</span><span class="o">()</span> <span class="o">{</span>
+            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"   Mi turno: Tijera"</span><span class="o">);</span>
+        <span class="o">}</span>
+    <span class="o">},</span>
+    <span class="n">PAPER</span> <span class="o">{</span>
+        <span class="nd">@Override</span>
+        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">show</span><span class="o">()</span> <span class="o">{</span>
+            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"   Mi turno: Papel"</span><span class="o">);</span>
+        <span class="o">}</span>
+    <span class="o">},</span>
+    <span class="n">ROCK</span> <span class="o">{</span>
+        <span class="nd">@Override</span>
+        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">show</span><span class="o">()</span> <span class="o">{</span>
+            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"   Mi turno: Piedra"</span><span class="o">);</span>
+        <span class="o">}</span>
+    <span class="o">};</span>
+
+    <span class="kd">public</span> <span class="kd">abstract</span> <span class="kt">void</span> <span class="nf">show</span><span class="o">();</span>
+<span class="o">}</span></code></pre></figure>
+
+<p>Hemos logrado encapsulación y un código fuente mas legible.</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="c1">//generar seña</span>
+<span class="n">computerMove</span> <span class="o">=</span> <span class="n">HandSign</span><span class="o">.</span><span class="na">values</span><span class="o">()[</span><span class="k">new</span> <span class="n">Random</span><span class="o">().</span><span class="na">nextInt</span><span class="o">(</span><span class="n">HandSign</span><span class="o">.</span><span class="na">values</span><span class="o">().</span><span class="na">length</span><span class="o">)];</span>
+<span class="c1">//mostrar seña</span>
+<span class="n">HandSign</span><span class="o">.</span><span class="na">valueOf</span><span class="o">(</span><span class="n">computerMove</span><span class="o">.</span><span class="na">name</span><span class="o">()).</span><span class="na">show</span><span class="o">();</span></code></pre></figure>
+
+<div id="id-section6" />
+
+<h2 id="usar-interfaces-para-extender-enum">Usar interfaces para extender enum.</h2>
+
+<p>Como mencionammos al comienzo de este post, los enum no pueden ser extendidos. La mayoría de las veces extender enums es una mala idea, pero hay casos donde tiene sentido.</p>
+
+<p>Para el caso nuestro juego Piedra-Papel-Tijera, tenemos un enumerado que describe los distintos niveles de juego y una comportamiento asociado, usando la misma técnica del método abstracto.</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">enum</span> <span class="n">GameMode</span> <span class="o">{</span>
+
+    <span class="n">LEVEL_NOVICE</span> <span class="o">{</span>
+        <span class="nd">@Override</span>
+        <span class="kd">public</span> <span class="n">Game</span> <span class="nf">proccesGame</span><span class="o">(</span><span class="n">HandSign</span> <span class="n">player</span><span class="o">,</span> <span class="n">Params</span> <span class="n">params</span><span class="o">)</span> <span class="o">{</span>
+            <span class="c1">// lógica que procesa el juego nivel novato</span>
+
+        <span class="o">}</span>
+
+    <span class="o">},</span> <span class="n">LEVEL_GOD</span> <span class="o">{</span>
+        <span class="nd">@Override</span>
+        <span class="kd">public</span> <span class="n">Game</span> <span class="nf">proccesGame</span><span class="o">(</span><span class="n">HandSign</span> <span class="n">player</span><span class="o">,</span> <span class="n">Params</span> <span class="n">params</span><span class="o">)</span> <span class="o">{</span>
+            <span class="c1">// lógica que procesa el juego nivel Dios</span>
+
+        <span class="o">}</span>
+
+    <span class="o">};</span>
+
+    <span class="kd">public</span> <span class="n">abstrac</span> <span class="n">Game</span> <span class="nf">proccesGame</span><span class="o">(</span><span class="n">HandSign</span> <span class="n">player</span><span class="o">,</span> <span class="n">Params</span> <span class="n">params</span><span class="o">);</span>
+<span class="o">}</span></code></pre></figure>
+
+<p>El problema con este enumerado es que no esta basado en un conjunto fijo de constantes bien conocidas, y puede darse el caso  que en futuros requerimiento podríamos tener que soportar otros niveles de juegos, por ejemplo, un nuevo nivel LEVEL_ADVANCED.</p>
+
+<p>El enumerado anterior HandSign que describe las señas posibles del juego Piedra-Papel-Tijera no va a cambiar en el tiempo porque define el juego, si agregáramos mas señas el juego sería otro.</p>
+
+<p>Una posibilidad sería modificar el código fuente de GameMode, agregar esta nueva constante e implementar el método abstracto. Esto viola uno de los principios SOLID ,el principio de Abierto/Cerrado, cerrado a la modificación y abierto a la extensión.</p>
+
+<p>Los enum violan el principio Abierto/Cerrado porque no permiten la extensión sin modificación.</p>
+
+<p>La forma de solucionar esto, es usar una interface mas que un enum, a veces esto se hace instintivamente cuando trabajamos con clases.</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">IGameMode</span> <span class="o">{</span>
+
+    <span class="kd">public</span> <span class="kd">abstract</span> <span class="n">Game</span> <span class="nf">proccesGame</span><span class="o">(</span><span class="n">HandSign</span> <span class="n">player</span><span class="o">,</span> <span class="n">Params</span> <span class="n">params</span><span class="o">);</span>
+<span class="o">}</span></code></pre></figure>
+
+<p>Y el enumerado implementando la interface IGameMode.</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">enum</span> <span class="n">GameMode</span> <span class="kd">implements</span> <span class="n">IGameMode</span> <span class="o">{</span>
+
+    <span class="n">LEVEL_NOVICE</span> <span class="o">{</span>
+        <span class="nd">@Override</span>
+        <span class="kd">public</span> <span class="n">Game</span> <span class="nf">proccesGame</span><span class="o">(</span><span class="n">HandSign</span> <span class="n">player</span><span class="o">,</span> <span class="n">Params</span> <span class="n">params</span><span class="o">)</span> <span class="o">{</span>
+
+
+        <span class="o">}</span>
+
+    <span class="o">},</span> <span class="n">LEVEL_GOD</span> <span class="o">{</span>
+        <span class="nd">@Override</span>
+        <span class="kd">public</span> <span class="n">Game</span> <span class="nf">proccesGame</span><span class="o">(</span><span class="n">HandSign</span> <span class="n">player</span><span class="o">,</span> <span class="n">Params</span> <span class="n">params</span><span class="o">)</span> <span class="o">{</span>
+
+        <span class="o">}</span>
+
+    <span class="o">};</span>
+
+<span class="o">}</span></code></pre></figure>
+
+<p>Ahora ya podemos crear un nuevo enum que implemente la interface IGameMode para la constante LEVEL_ADVANCED y lograr extensión sin modificación.</p>
+
+<div id="id-conclusiones" />
+
+<h2 id="conclusiones">Conclusiones.</h2>
+
+<p>Los enum de Java son poderosos para modelar dominios que describen un conjunto fijo de constantes, como son clases podemos asociarles información y comportamiento.</p>
+
+<p>Los enum son una alternativa al uso de sentencia swith e if anidados.</p>
+
+<p>Los enum no permiten la extensión, siempre debes evaluar el dominio y determinar si modificas el código agregando el nuevo estado al enumerado o usas interface. El principio Abierto/Cerrado, es un principio y no un dogma a ser aplicado en todos los casos.</p>
+
+<p>Usamos el juego Priedra-Papel-Tijera para mostrar el uso de los enum, el código fuente puedes verlo en <a href="https://github.com/juanek">https://github.com/juanek</a>.</p>
+
+<figure class="highlight"><pre><code class="language-console" data-lang="console"><span class="gp">$</span> mvn <span class="nb">exec</span>:java <span class="nt">-Dexec</span>.mainClass<span class="o">=</span><span class="s2">"ar.com.jekipes.enums.RockPaperScissors"</span>
+<span class="go">
+Vamos a comenzar...
+
+Piedra-Papel-Tijera
+
+
+(Ingresa s para Tijera , p para Papel, t para Piedra, q para salir): s
+Tu Turno: Tijera
+Mi turno: Papel
+
+***************************************************
+  Tu ganas!
+***************************************************
+Piedra-Papel-Tijera
+
+
+(Ingresa s para Tijera , p para Papel, t para Piedra, q para salir):</span></code></pre></figure>
+
+<div id="id-referencias" />
+
+<h2 id="referencias">Referencias.</h2>
+
+<p><a href="https://docs.oracle.com/javase/tutorial/java/javaOO/enum.html">https://docs.oracle.com/javase/tutorial/java/javaOO/enum.html</a></p>
+
+<p><a href="https://blog.scottlogic.com/2016/07/28/java-enums-how-to-use-them-smarter.html">https://blog.scottlogic.com/2016/07/28/java-enums-how-to-use-them-smarter.html</a></p>
+
+<p><a href="https://www.oreilly.com/library/view/effective-java-3rd/9780134686097/">Effective Java, 3rd Edition</a></p>
+
+      </article>
+    </div>
+  </div>
+  
+</div>
+
+    <footer class="py-5">
+  <hr>
+  <div class="container text-center text-info">
+    <div class="row">
+      <div class="col">
+        
+          <div class="social-links">
+  <a target="_blank" href="https://github.com/juanek">
+    <i class="fab fa-github fa-2x"></i>
+  </a>
+  <a href="mailto:juanekipes@gmail.com">
+    <i class="fa fa-envelope fa-2x" ></i>
+  </a>
+  <a target="_blank" href="https://github.com/juanek">
+    <i class="fab fa-pinterest fa-2x"></i>
+  </a>
+  <!--<a target="_blank" href="https://twitter.com/">
+    <i class="fab fa-twitter fa-2x"></i>
+  </a>-->
+</div>
+
+        
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        Juan E. Kipes &copy; 2019.
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- JS -->
+<script defer src="https://use.fontawesome.com/releases/v5.0.8/js/all.js" integrity="sha384-SlE991lGASHoBfWbelyBPLsUlwY1GwNDJo3jSJO04KZ33K2bwfV9YBauFfnzvynJ" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+ <script src="//cdnjs.cloudflare.com/ajax/libs/highlightjs-line-numbers.js/2.4.0/highlightjs-line-numbers.min.js"></script>
+  <script type="text/javascript">
+    hljs.initHighlightingOnLoad();
+    //hljs.initLineNumbersOnLoad();
+    hljs.initLineNumbersOnLoad({
+    singleLine: true
+});
+ </script>
+
+  </body>
+</html>
