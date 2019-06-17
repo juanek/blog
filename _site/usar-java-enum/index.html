@@ -24,7 +24,7 @@
 
 
  
-   <!-- Begin Jekyll SEO tag v2.5.0 -->
+   <!-- Begin Jekyll SEO tag v2.6.1 -->
 <title>Cómo usar los Java Enum. | Juan E. Kipes Blog</title>
 <meta name="generator" content="Jekyll v3.8.5" />
 <meta property="og:title" content="Cómo usar los Java Enum." />
@@ -38,7 +38,7 @@
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2019-01-19T08:49:00-03:00" />
 <script type="application/ld+json">
-{"description":"Contenido Introducción ¿Qué son los Java enums? Los enum en lugar de constantes int Los enum como Singleton. Reemplazar los if anidados por enum. Usar interfaces para extender enum. Conclusiones. Referencias.","author":{"@type":"Person","name":"Juan E. Kipes"},"@type":"BlogPosting","url":"http://localhost:4000/usar-java-enum/","headline":"Cómo usar los Java Enum.","dateModified":"2019-01-19T08:49:00-03:00","datePublished":"2019-01-19T08:49:00-03:00","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/usar-java-enum/"},"@context":"http://schema.org"}</script>
+{"description":"Contenido Introducción ¿Qué son los Java enums? Los enum en lugar de constantes int Los enum como Singleton. Reemplazar los if anidados por enum. Usar interfaces para extender enum. Conclusiones. Referencias.","author":{"@type":"Person","name":"Juan E. Kipes"},"@type":"BlogPosting","url":"http://localhost:4000/usar-java-enum/","headline":"Cómo usar los Java Enum.","dateModified":"2019-01-19T08:49:00-03:00","datePublished":"2019-01-19T08:49:00-03:00","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/usar-java-enum/"},"@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
 </head>
@@ -139,18 +139,18 @@
 <p>Una forma comun de representar enumerados es usar el int enum pattern</p>
 
 <figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="c1">// El int enum pattern - tiene muchas deficiencias!</span>
-<span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">int</span> <span class="n">APPLE_FUJI</span>           <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
-<span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">int</span> <span class="n">APPLE_PIPPIN</span>         <span class="o">=</span> <span class="mi">1</span><span class="o">;</span>
-<span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">int</span> <span class="n">APPLE_GRANNY_SMITH</span>   <span class="o">=</span> <span class="mi">2</span><span class="o">;</span>
+<span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">int</span> <span class="no">APPLE_FUJI</span>           <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+<span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">int</span> <span class="no">APPLE_PIPPIN</span>         <span class="o">=</span> <span class="mi">1</span><span class="o">;</span>
+<span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">int</span> <span class="no">APPLE_GRANNY_SMITH</span>   <span class="o">=</span> <span class="mi">2</span><span class="o">;</span>
 
-<span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">int</span> <span class="n">ORANGE_NAVEL</span>         <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
-<span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">int</span> <span class="n">ORANGE_TEMPLE</span>        <span class="o">=</span> <span class="mi">1</span><span class="o">;</span>
-<span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">int</span> <span class="n">ORANGE_BLOOD</span>         <span class="o">=</span> <span class="mi">2</span><span class="o">;</span></code></pre></figure>
+<span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">int</span> <span class="no">ORANGE_NAVEL</span>         <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+<span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">int</span> <span class="no">ORANGE_TEMPLE</span>        <span class="o">=</span> <span class="mi">1</span><span class="o">;</span>
+<span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">int</span> <span class="no">ORANGE_BLOOD</span>         <span class="o">=</span> <span class="mi">2</span><span class="o">;</span></code></pre></figure>
 
 <p>Una forma más elegante elegante y segura es usar enum.</p>
 
-<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">enum</span> <span class="n">Apple</span> <span class="o">{</span> <span class="n">FUJI</span><span class="o">,</span> <span class="n">PIPPIN</span><span class="o">,</span> <span class="n">GRANNY_SMITH</span> <span class="o">}</span>
-<span class="kd">public</span> <span class="kd">enum</span> <span class="n">Orange</span> <span class="o">{</span> <span class="n">NAVEL</span><span class="o">,</span> <span class="n">TEMPLE</span><span class="o">,</span> <span class="n">BLOOD</span> <span class="o">}</span></code></pre></figure>
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">enum</span> <span class="nc">Apple</span> <span class="o">{</span> <span class="no">FUJI</span><span class="o">,</span> <span class="no">PIPPIN</span><span class="o">,</span> <span class="no">GRANNY_SMITH</span> <span class="o">}</span>
+<span class="kd">public</span> <span class="kd">enum</span> <span class="nc">Orange</span> <span class="o">{</span> <span class="no">NAVEL</span><span class="o">,</span> <span class="no">TEMPLE</span><span class="o">,</span> <span class="no">BLOOD</span> <span class="o">}</span></code></pre></figure>
 
 <div id="id-section4" />
 
@@ -158,11 +158,11 @@
 
 <p>Usando enum en Java es fácil implementar el patrón Singleton:</p>
 
-<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">enum</span> <span class="n">Singleton</span> <span class="o">{</span>
-    <span class="n">INSTANCE</span><span class="o">;</span>
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">enum</span> <span class="nc">Singleton</span> <span class="o">{</span>
+    <span class="no">INSTANCE</span><span class="o">;</span>
     <span class="kd">private</span> <span class="nf">Singleton</span><span class="o">()</span> <span class="o">{</span>
         <span class="c1">//Es llamado la primera vez cuando el enum es inicializado</span>
-        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"I am initialised"</span><span class="o">);</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"I am initialised"</span><span class="o">);</span>
     <span class="o">}</span>
 <span class="o">}</span></code></pre></figure>
 
@@ -174,19 +174,19 @@
 
 <p>Para mostrar un ejemplo, vamos a modelar el juego Piedra-Papel-Tijera para ello usamos un enumerado que representa las tres señas posibles.</p>
 
-<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">enum</span> <span class="n">HandSign</span> <span class="o">{</span>  <span class="n">SCISSOR</span><span class="o">,</span> <span class="n">PAPER</span><span class="o">,</span> <span class="n">ROCK</span>  <span class="o">}</span></code></pre></figure>
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">enum</span> <span class="nc">HandSign</span> <span class="o">{</span>  <span class="no">SCISSOR</span><span class="o">,</span> <span class="no">PAPER</span><span class="o">,</span> <span class="no">ROCK</span>  <span class="o">}</span></code></pre></figure>
 
 <p>Queremos obtener una seña aleatorio para la máquina y mostrar un mensaje en consola. Una posible implementación sería:</p>
 
 <figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="c1">//generar un enum aleatorio</span>
-<span class="n">computerMove</span> <span class="o">=</span> <span class="n">HandSign</span><span class="o">.</span><span class="na">values</span><span class="o">()[</span><span class="k">new</span> <span class="n">Random</span><span class="o">().</span><span class="na">nextInt</span><span class="o">(</span><span class="n">HandSign</span><span class="o">.</span><span class="na">values</span><span class="o">().</span><span class="na">length</span><span class="o">)];</span>
+<span class="n">computerMove</span> <span class="o">=</span> <span class="nc">HandSign</span><span class="o">.</span><span class="na">values</span><span class="o">()[</span><span class="k">new</span> <span class="nc">Random</span><span class="o">().</span><span class="na">nextInt</span><span class="o">(</span><span class="nc">HandSign</span><span class="o">.</span><span class="na">values</span><span class="o">().</span><span class="na">length</span><span class="o">)];</span>
 <span class="c1">//mostar mensaje informando la opción generada</span>
-<span class="k">if</span> <span class="o">(</span><span class="n">computerMove</span> <span class="o">==</span> <span class="n">HandSign</span><span class="o">.</span><span class="na">SCISSOR</span><span class="o">)</span> <span class="o">{</span>
-    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"   Mi turno: Tijera"</span><span class="o">);</span>
-<span class="o">}</span> <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">computerMove</span> <span class="o">==</span> <span class="n">HandSign</span><span class="o">.</span><span class="na">PAPER</span><span class="o">)</span> <span class="o">{</span>
-    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"   Mi turno: Papel"</span><span class="o">);</span>
+<span class="k">if</span> <span class="o">(</span><span class="n">computerMove</span> <span class="o">==</span> <span class="nc">HandSign</span><span class="o">.</span><span class="na">SCISSOR</span><span class="o">)</span> <span class="o">{</span>
+    <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"   Mi turno: Tijera"</span><span class="o">);</span>
+<span class="o">}</span> <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">computerMove</span> <span class="o">==</span> <span class="nc">HandSign</span><span class="o">.</span><span class="na">PAPER</span><span class="o">)</span> <span class="o">{</span>
+    <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"   Mi turno: Papel"</span><span class="o">);</span>
 <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
-    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"   Mi turno: Piedra"</span><span class="o">);</span>
+    <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"   Mi turno: Piedra"</span><span class="o">);</span>
 <span class="o">}</span></code></pre></figure>
 
 <p>Este caso es muy sencillo, unos pocos estados y con un comportamiento asociado muy sencillo, mostrar un mensaje.</p>
@@ -195,23 +195,23 @@
 
 <p>El enum ahora además de representar un conjunto fijo de constantes tiene una lógica asociada a cada constante mediante el método abstracto show().</p>
 
-<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">enum</span> <span class="n">HandSign</span> <span class="o">{</span>
-    <span class="n">SCISSOR</span> <span class="o">{</span>
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">enum</span> <span class="nc">HandSign</span> <span class="o">{</span>
+    <span class="no">SCISSOR</span> <span class="o">{</span>
         <span class="nd">@Override</span>
         <span class="kd">public</span> <span class="kt">void</span> <span class="nf">show</span><span class="o">()</span> <span class="o">{</span>
-            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"   Mi turno: Tijera"</span><span class="o">);</span>
+            <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"   Mi turno: Tijera"</span><span class="o">);</span>
         <span class="o">}</span>
     <span class="o">},</span>
-    <span class="n">PAPER</span> <span class="o">{</span>
+    <span class="no">PAPER</span> <span class="o">{</span>
         <span class="nd">@Override</span>
         <span class="kd">public</span> <span class="kt">void</span> <span class="nf">show</span><span class="o">()</span> <span class="o">{</span>
-            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"   Mi turno: Papel"</span><span class="o">);</span>
+            <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"   Mi turno: Papel"</span><span class="o">);</span>
         <span class="o">}</span>
     <span class="o">},</span>
-    <span class="n">ROCK</span> <span class="o">{</span>
+    <span class="no">ROCK</span> <span class="o">{</span>
         <span class="nd">@Override</span>
         <span class="kd">public</span> <span class="kt">void</span> <span class="nf">show</span><span class="o">()</span> <span class="o">{</span>
-            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"   Mi turno: Piedra"</span><span class="o">);</span>
+            <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"   Mi turno: Piedra"</span><span class="o">);</span>
         <span class="o">}</span>
     <span class="o">};</span>
 
@@ -221,9 +221,9 @@
 <p>Hemos logrado encapsulación y un código fuente mas legible.</p>
 
 <figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="c1">//generar seña</span>
-<span class="n">computerMove</span> <span class="o">=</span> <span class="n">HandSign</span><span class="o">.</span><span class="na">values</span><span class="o">()[</span><span class="k">new</span> <span class="n">Random</span><span class="o">().</span><span class="na">nextInt</span><span class="o">(</span><span class="n">HandSign</span><span class="o">.</span><span class="na">values</span><span class="o">().</span><span class="na">length</span><span class="o">)];</span>
+<span class="n">computerMove</span> <span class="o">=</span> <span class="nc">HandSign</span><span class="o">.</span><span class="na">values</span><span class="o">()[</span><span class="k">new</span> <span class="nc">Random</span><span class="o">().</span><span class="na">nextInt</span><span class="o">(</span><span class="nc">HandSign</span><span class="o">.</span><span class="na">values</span><span class="o">().</span><span class="na">length</span><span class="o">)];</span>
 <span class="c1">//mostrar seña</span>
-<span class="n">HandSign</span><span class="o">.</span><span class="na">valueOf</span><span class="o">(</span><span class="n">computerMove</span><span class="o">.</span><span class="na">name</span><span class="o">()).</span><span class="na">show</span><span class="o">();</span></code></pre></figure>
+<span class="nc">HandSign</span><span class="o">.</span><span class="na">valueOf</span><span class="o">(</span><span class="n">computerMove</span><span class="o">.</span><span class="na">name</span><span class="o">()).</span><span class="na">show</span><span class="o">();</span></code></pre></figure>
 
 <div id="id-section6" />
 
@@ -233,25 +233,25 @@
 
 <p>Para el caso nuestro juego Piedra-Papel-Tijera, tenemos un enumerado que describe los distintos niveles de juego y una comportamiento asociado, usando la misma técnica del método abstracto.</p>
 
-<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">enum</span> <span class="n">GameMode</span> <span class="o">{</span>
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">enum</span> <span class="nc">GameMode</span> <span class="o">{</span>
 
-    <span class="n">LEVEL_NOVICE</span> <span class="o">{</span>
+    <span class="no">LEVEL_NOVICE</span> <span class="o">{</span>
         <span class="nd">@Override</span>
-        <span class="kd">public</span> <span class="n">Game</span> <span class="nf">proccesGame</span><span class="o">(</span><span class="n">HandSign</span> <span class="n">player</span><span class="o">,</span> <span class="n">Params</span> <span class="n">params</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kd">public</span> <span class="nc">Game</span> <span class="nf">proccesGame</span><span class="o">(</span><span class="nc">HandSign</span> <span class="n">player</span><span class="o">,</span> <span class="nc">Params</span> <span class="n">params</span><span class="o">)</span> <span class="o">{</span>
             <span class="c1">// lógica que procesa el juego nivel novato</span>
 
         <span class="o">}</span>
 
-    <span class="o">},</span> <span class="n">LEVEL_GOD</span> <span class="o">{</span>
+    <span class="o">},</span> <span class="no">LEVEL_GOD</span> <span class="o">{</span>
         <span class="nd">@Override</span>
-        <span class="kd">public</span> <span class="n">Game</span> <span class="nf">proccesGame</span><span class="o">(</span><span class="n">HandSign</span> <span class="n">player</span><span class="o">,</span> <span class="n">Params</span> <span class="n">params</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kd">public</span> <span class="nc">Game</span> <span class="nf">proccesGame</span><span class="o">(</span><span class="nc">HandSign</span> <span class="n">player</span><span class="o">,</span> <span class="nc">Params</span> <span class="n">params</span><span class="o">)</span> <span class="o">{</span>
             <span class="c1">// lógica que procesa el juego nivel Dios</span>
 
         <span class="o">}</span>
 
     <span class="o">};</span>
 
-    <span class="kd">public</span> <span class="n">abstrac</span> <span class="n">Game</span> <span class="nf">proccesGame</span><span class="o">(</span><span class="n">HandSign</span> <span class="n">player</span><span class="o">,</span> <span class="n">Params</span> <span class="n">params</span><span class="o">);</span>
+    <span class="kd">public</span> <span class="n">abstrac</span> <span class="nc">Game</span> <span class="nf">proccesGame</span><span class="o">(</span><span class="nc">HandSign</span> <span class="n">player</span><span class="o">,</span> <span class="nc">Params</span> <span class="n">params</span><span class="o">);</span>
 <span class="o">}</span></code></pre></figure>
 
 <p>El problema con este enumerado es que no esta basado en un conjunto fijo de constantes bien conocidas, y puede darse el caso  que en futuros requerimiento podríamos tener que soportar otros niveles de juegos, por ejemplo, un nuevo nivel LEVEL_ADVANCED.</p>
@@ -266,23 +266,23 @@
 
 <figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">IGameMode</span> <span class="o">{</span>
 
-    <span class="kd">public</span> <span class="kd">abstract</span> <span class="n">Game</span> <span class="nf">proccesGame</span><span class="o">(</span><span class="n">HandSign</span> <span class="n">player</span><span class="o">,</span> <span class="n">Params</span> <span class="n">params</span><span class="o">);</span>
+    <span class="kd">public</span> <span class="kd">abstract</span> <span class="nc">Game</span> <span class="nf">proccesGame</span><span class="o">(</span><span class="nc">HandSign</span> <span class="n">player</span><span class="o">,</span> <span class="nc">Params</span> <span class="n">params</span><span class="o">);</span>
 <span class="o">}</span></code></pre></figure>
 
 <p>Y el enumerado implementando la interface IGameMode.</p>
 
-<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">enum</span> <span class="n">GameMode</span> <span class="kd">implements</span> <span class="n">IGameMode</span> <span class="o">{</span>
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">enum</span> <span class="nc">GameMode</span> <span class="kd">implements</span> <span class="nc">IGameMode</span> <span class="o">{</span>
 
-    <span class="n">LEVEL_NOVICE</span> <span class="o">{</span>
+    <span class="no">LEVEL_NOVICE</span> <span class="o">{</span>
         <span class="nd">@Override</span>
-        <span class="kd">public</span> <span class="n">Game</span> <span class="nf">proccesGame</span><span class="o">(</span><span class="n">HandSign</span> <span class="n">player</span><span class="o">,</span> <span class="n">Params</span> <span class="n">params</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kd">public</span> <span class="nc">Game</span> <span class="nf">proccesGame</span><span class="o">(</span><span class="nc">HandSign</span> <span class="n">player</span><span class="o">,</span> <span class="nc">Params</span> <span class="n">params</span><span class="o">)</span> <span class="o">{</span>
 
 
         <span class="o">}</span>
 
-    <span class="o">},</span> <span class="n">LEVEL_GOD</span> <span class="o">{</span>
+    <span class="o">},</span> <span class="no">LEVEL_GOD</span> <span class="o">{</span>
         <span class="nd">@Override</span>
-        <span class="kd">public</span> <span class="n">Game</span> <span class="nf">proccesGame</span><span class="o">(</span><span class="n">HandSign</span> <span class="n">player</span><span class="o">,</span> <span class="n">Params</span> <span class="n">params</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kd">public</span> <span class="nc">Game</span> <span class="nf">proccesGame</span><span class="o">(</span><span class="nc">HandSign</span> <span class="n">player</span><span class="o">,</span> <span class="nc">Params</span> <span class="n">params</span><span class="o">)</span> <span class="o">{</span>
 
         <span class="o">}</span>
 
