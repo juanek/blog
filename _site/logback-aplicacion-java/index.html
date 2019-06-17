@@ -10,7 +10,14 @@
   <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:400,600" rel="stylesheet" type="text/css">
   <!--<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600' rel='stylesheet' type='text/css'>-->
 <link rel="stylesheet" href="/css/main.css">
-   
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-126646878-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-126646878-1');
+</script> 
     
 
 
@@ -238,7 +245,7 @@ Primero necesitamos un archivo de configuración. Creamos un archivo de texto ll
 TRACE &lt; DEBUG &lt; INFO &lt; WARN &lt; ERROR
 </div>
 
-<p>En nuestro ejemplo, el root looger está configurado a nivel <code>INFO</code>, si cambiamos <code>logger.info()</code> por <code>logger.debug()</code> veremos que no imprime nada. y si volvemos a reemplazar <code>logger.debug()</code> por <code>logger.warn()</code> veremos que el logger registra mensajes de log.</p>
+<p>En nuestro ejemplo, el root looger está configurado a nivel <code class="highlighter-rouge">INFO</code>, si cambiamos <code class="highlighter-rouge">logger.info()</code> por <code class="highlighter-rouge">logger.debug()</code> veremos que no imprime nada. y si volvemos a reemplazar <code class="highlighter-rouge">logger.debug()</code> por <code class="highlighter-rouge">logger.warn()</code> veremos que el logger registra mensajes de log.</p>
 <div class="bs-callout bs-callout-success">
 <b>REGLA: Cualquier logger con nivel X puede manejar mensajes de nivel Y, donde Y &gt;= X.</b>
 </div>
@@ -292,7 +299,7 @@ TRACE &lt; DEBUG &lt; INFO &lt; WARN &lt; ERROR
         <span class="nt">&lt;appender-ref</span> <span class="na">ref=</span><span class="s">"STDOUT"</span> <span class="nt">/&gt;</span>
     <span class="nt">&lt;/logger&gt;</span></code></pre></figure>
 
-<p>La configuración de los Logger se realiza de manera jerárquica, en donde el Logger <code>padre</code> de todos los demás es <code>root</code>. Cada Logger adicional se jerarquiza basado en su nombre y usando puntos como separador, así un Logger de nombre <code>ar.com.jekipes</code> es <code>padre</code> de <code>ar.com.jekipes.util</code> por lo que este último hereda la configuración definida en <code>logback.xml</code> para su Logger <code>padre</code>.</p>
+<p>La configuración de los Logger se realiza de manera jerárquica, en donde el Logger <code class="highlighter-rouge">padre</code> de todos los demás es <code class="highlighter-rouge">root</code>. Cada Logger adicional se jerarquiza basado en su nombre y usando puntos como separador, así un Logger de nombre <code class="highlighter-rouge">ar.com.jekipes</code> es <code class="highlighter-rouge">padre</code> de <code class="highlighter-rouge">ar.com.jekipes.util</code> por lo que este último hereda la configuración definida en <code class="highlighter-rouge">logback.xml</code> para su Logger <code class="highlighter-rouge">padre</code>.</p>
 
 <div class="bs-callout bs-callout-success">
 <b>Regla: La jerarquía de logs significa que un logger (X.Y) es automáticamnte considerado padre de todos los loggers nombrados (X.Y.*). Si el logger padre está definido en la configuración, cualquiera de los mensajes de log dirigidos al logger hijo también seran manejados por el logger padre.</b>
@@ -533,6 +540,28 @@ Herramienta imprescindible para hacer mejores aplicaciones.</p>
       </article>
     </div>
   </div>
+  
+    
+
+  <div id="disqus_thread"></div>
+  <script>
+    var disqus_config = function () {
+      this.page.url = 'http://localhost:4000/logback-aplicacion-java/';
+      this.page.identifier = 'http://localhost:4000/logback-aplicacion-java/';
+    };
+
+    (function() {
+      var d = document, s = d.createElement('script');
+
+      s.src = 'https://juanekipes.disqus.com/embed.js';
+
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+
   
 </div>
 
