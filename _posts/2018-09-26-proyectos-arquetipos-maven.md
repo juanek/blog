@@ -284,7 +284,7 @@ Hay tres ciclos de vida para la construcción de proyectos proyectos predefinido
 
 Cada uno de estos ciclos está constituído por fases, donde cada fase representa un estado en el ciclo de vida de construcción del proyecto.
 
-![Ciclo de Maven](/img/ciclo-maven.svg)
+![Ciclo de Maven](../img/ciclo-maven.svg)
 
 Por ejemplo, el ciclo de vida **Default** comprende las siguientes fases
 <ul class="list-unstyled">
