@@ -1,6 +1,6 @@
 ---
   layout: post
-  title: "Como liberar espacio de disco en linux."
+  title: "Encontrar los archivos que más espacio ocupan en disco."
   date:   2018-09-15 17:03:00 +0800
   tags: linux
   summary: "Combinando los comandos df y du podemos analizar y liberar espacio en nuestro sistema Linux."
